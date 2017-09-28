@@ -60,13 +60,17 @@ app.get("/maps", (req, res) => {
 
 //map display
 app.get("/maps/:id", (req, res) => {
-  let id = req.params.id
-  res.render("splash")
+  res.render("maps")
 });
+
+//create map
+app.post("/maps/create", (req, res) => {
+  res.render("maps")
+})
 
 //map edit
 app.put("/maps/edit", (req, res) => {
-  res.render("map")
+  res.render("maps")
 });
 
 app.use("/api/users", mapRoutes(knex));
@@ -91,8 +95,10 @@ app.post("/register", (req, res) => {
     username: req.body.reg_username,
     password: hashedPassword
   })
+  .returning("id")
+
   .then(() => {
-    req.session.id = reg_username
+    req.session.id = id
     res.redirect("maps")
   })
   .catch((err) => {
@@ -108,7 +114,7 @@ app.post("/login", (req, res) => {
   .where("username", "===", req.body.username)
   .then((userRow) => {
     if (bcrypt.compareSync(userPass, password)) {
-      req.session.id = username
+      req.session.id = userRow.id
       res.redirect("maps")
     }
   })
@@ -122,6 +128,7 @@ app.post("/logout", (req, res) => {
 })
 
 app.get("/users/:id", (req, res) => {
+  
   res.render("profile")
 })
 

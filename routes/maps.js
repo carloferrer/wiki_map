@@ -37,6 +37,15 @@ module.exports = (knex) => {
     })
   })
 
+  //create new map
+  router.post("/create", (req, res) => {
+    knex("map_index")
+    .insert({
+      title: req.body.map_title,
+      creator_id: req.session.id
+    })
+  })
+
   //add point to map
   router.post(":id/points/new", (req, res) => {
     knex("map_points").where("map_index_id", "=", req.params.id)
