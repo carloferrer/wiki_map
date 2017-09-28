@@ -67,6 +67,15 @@ module.exports = (knex) => {
     })
   })
 
+  //delete map
+  router.delete("/:id", (req, res) => (
+    knex("map_index").where("id", "=", req.params.id)
+    .del()
+    .then(() => {
+      res.redirect("/maps")
+    })
+  ))
+
   //edit points
   router.put("/:id/points/:points_id", (req, res) => {
     knex("map_points").where("id", "=", req.body.point_id)

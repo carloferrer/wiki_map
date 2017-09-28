@@ -36,9 +36,6 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
-// Mount all resource routes
-// app.use("/api/users", usersRoutes(knex));
-
 // Home
 app.get("/", (req, res) => {
   res.render("splash")
@@ -60,22 +57,26 @@ app.get("/maps/:id", (req, res) => {
 
 //map edit
 app.put("/maps/edit", (req, res) => {
-  res.render("/map")
+  res.render("map")
 });
 
-
+app.use("/api/users", mapRoutes(knex));
 
 //user routes
 app.get("/login", (req, res) => {
-  res.render("/login")
+  res.render("login")
 });
 
 app.post("/register", (req, res) => {
-  res.redirect("/map")
+  res.redirect("maps")
 });
 
 app.post("/login", (req, res) => {
-  res.redirect("/map")
+  res.redirect("maps")
+})
+
+app.get("/users/:id", (req, res) => {
+  res.render("profile")
 })
 
 app.listen(PORT, () => {
