@@ -33,4 +33,13 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
+  return Promise.all([
+    knex.schema.table('users', function(table) {
+      table.renameColumn('username', 'name');
+      table.dropColumn('password');
+    }),
+    knex.schema.dropTable('map_index'),
+    knex.schema.dropTable('favourite'),
+    knex.schema.dropTable('map_points')
+  ]);
 };
