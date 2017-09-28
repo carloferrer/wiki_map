@@ -14,6 +14,15 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
+const bcrypt      = require('bcrypt');
+const saltRounds  = 10;
+
+var cookieSession = require('cookie-session');
+app.use(cookieSession({
+  name: 'session',
+  keys: ["key1", "key2"]
+}));
+
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const mapRoutes   = require("./routes/maps")
@@ -63,11 +72,29 @@ app.put("/maps/edit", (req, res) => {
 app.use("/api/users", mapRoutes(knex));
 
 //user routes
-app.get("/login", (req, res) => {
+app.get("/users/login", (req, res) => {
   res.render("login")
 });
 
 app.post("/register", (req, res) => {
+  
+  if (!req.body.reg_username || !req.body.reg_password) {
+    res.status(400).send("Either the email or password field was empty. Please try again.")
+    return;
+  };
+
+  let hashed = req.body.password;
+  let hashedPassword = bcrypt.hashSync(hashed, 10);
+
+  knex("users").where("username", "!=", username)
+  .insert({
+    username: req.body.reg_password,
+    password: hashedPassword
+  })
+  .then(() => {
+    req.session.id = 
+  })
+
   res.redirect("maps")
 });
 
