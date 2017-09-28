@@ -31,7 +31,6 @@ exports.seed = function(knex, Promise) {
   };
 
   const seedFave = function (mapid, userid) {
-    console.log(userid)
     return knex('favourite').insert([
       {map_id: mapid[0], user_id: userid[0]},
       {map_id: mapid[0], user_id: userid[1]},
