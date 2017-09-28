@@ -83,23 +83,42 @@ app.post("/register", (req, res) => {
     return;
   };
 
-  let hashed = req.body.password;
+  let hashed = req.body.reg_password;
   let hashedPassword = bcrypt.hashSync(hashed, 10);
 
-  knex("users").where("username", "!=", username)
+  knex("users").where("username", "!=", req.body.reg_username)
   .insert({
-    username: req.body.reg_password,
+    username: req.body.reg_username,
     password: hashedPassword
   })
   .then(() => {
-    req.session.id = 
+    req.session.id = reg_username
+    res.redirect("maps")
   })
-
-  res.redirect("maps")
+  .catch((err) => {
+    res.statusCode(400).send("Error, please go back and try again")
+  })
 });
 
 app.post("/login", (req, res) => {
-  res.redirect("maps")
+  let userPass = req.body.password
+  knex
+  .select("*")
+  .from("users")
+  .where("username", "===", req.body.username)
+  .then((userRow) => {
+    if (bcrypt.compareSync(userPass, password)) {
+      req.session.id = username
+      res.redirect("maps")
+    }
+  })
+  res.statusCode(400).send("Error, please try again")
+})
+
+app.post("/logout", (req, res) => {
+  res.clearCookie("id")
+  delete req.session.id
+  res.redirect("/")
 })
 
 app.get("/users/:id", (req, res) => {
