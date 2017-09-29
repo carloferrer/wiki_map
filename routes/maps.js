@@ -5,6 +5,19 @@ const router  = express.Router()
 
 module.exports = (knex) => {
 
+  //Load map index
+  router.get("/", (req, res) => {
+    knex
+    .select("*")
+    .from("map_index")
+    .then((results) => {
+      res.json(results)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  })
+
   //Load map
   router.get("/:id", (req, res) => {
     knex
