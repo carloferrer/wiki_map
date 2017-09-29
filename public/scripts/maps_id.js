@@ -1,18 +1,18 @@
-// $(document).ready(function() {
+$(document).ready(function() {
 
-//   loadMapIndex();
+  loadMap();
 
-//   function loadMapIndex(){
-//     $.get('http://localhost:8080/api/maps')
-//     .done(function(maps) {
-//       for (let i = 0; i < maps.length; i++) {
-//         $('#map-list').append('<li>'+maps[i].title+'<br>');
-//       }
+  function loadMap(){
+    $.get('http://localhost:8080/api/maps/:id')
+    .done(function(map) {
+      // for (let i = 0; i < maps.length; i++) {
+      //   $('#map-list').append('<li>'+maps[i].title+'<br>');
+      // }
+      console.log(map);
+    })
+    .fail(function(error) {
+      console.error(error);
+    });
+  }
 
-//     })
-//     .fail(function(error) {
-//       console.error(error);
-//     });
-//   }
-
-// });
+});
