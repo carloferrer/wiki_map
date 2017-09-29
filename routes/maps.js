@@ -9,7 +9,9 @@ module.exports = (knex) => {
   router.get("/:id", (req, res) => {
     knex
     .select("*")
-    .from("maps_index")
+    // Carlo Ferrer Edit:
+    // Fixed .from("maps_index") to read .from("map_index")
+    .from("map_index")
     .where({
       id: [req.params.id]
     })
@@ -40,7 +42,7 @@ module.exports = (knex) => {
   // //favorite a map
   // router.post("/fav", (req, res) => {
   //   knex("favourite")
-    
+
   // })
 
   //create new map
