@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MAP <%=map_id%></title>
+    <link rel="stylesheet" href="/styles/maps.css" type="text/css" />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <!-- <script type="text/javascript" src="../routes/maps.js"></script> -->
+    <script type="text/javascript" src="/scripts/maps_id.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQKTN_0e8RdueqYXuKZK99uNFndl6TN6k&libraries=places"></script>
+  </head>
+
+  <body>
+    <h1 id="map-title">MAP ID: <%=map_id%></h1>
+    <div id="info"></div>
+    <input id="pac-input" class="controls" type="text" placeholder="Search new region to refocus map boundary!">
+    <div id="map"></div>
+    <div id="point-list">LIST OF POINTS HERE</div>
+  </body>
+
+
+
+</html>
