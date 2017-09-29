@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
-
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <title>Map Adventure</title>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+    <h1>Welcome to Map Adventure!</h1>
+
+    <% if (user_id) { %>
+      <h3>YES</h3>
+    <% } else { %>
+      <h3>NO</h3>
+    <% } %>
+
+    <form action="/register" method="POST" style="margin:75px;">
+      <label for="reg_username">Enter your email:</label><br>
+      <input id="reg_username" type="reg_username" name="reg_username" placeholder="Username" style="width: 300px">
+      <br>
+      <label for="reg_password">Enter your password</label><br>
+      <input id="reg_password" type="reg_password" name="reg_password" placeholder="Password" style="width: 300px"><br><br>
+      <input type="submit" value="Submit"></form>
+
+      <form action="/logout" method="POST">
+      <input type="submit" value="Logout">
+      </form>
+
+      <form action="/login" method="POST" style="margin:75px;">
+        <label for="username">Enter your email:</label><br>
+        <input id="username" type="username" name="username" placeholder="Username" style="width: 300px">
+        <br>
+        <label for="password">Enter your password</label><br>
+        <input id="password" type="password" name="password" placeholder="Password" style="width: 300px"><br><br>
+        <input type="submit" value="Submit"></form>
+      
   </body>
 </html>

@@ -47,7 +47,8 @@ app.use(express.static("public"));
 
 // Home
 app.get("/", (req, res) => {
-  res.render("splash")
+  let userVerification = {user_id: req.session.id}
+  res.render("splash", userVerification)
 });
 
 // Mount all map resource routes
@@ -55,31 +56,37 @@ app.use("/api/maps", mapRoutes(knex));
 
 //map index
 app.get("/maps", (req, res) => {
-  res.render("map_list")
+  let userVerification = {user_id: req.session.id}
+  res.render("map_list", userVerification)
 });
 
 //map display
 app.get("/maps/:id", (req, res) => {
-  res.render("maps")
+  let userVerification = {user_id: req.session.id}
+  res.render("maps", userVerification)
 });
 
 //create map
 app.post("/maps/create", (req, res) => {
-  res.render("maps")
+  let userVerification = {user_id: req.session.id}
+  res.render("maps", userVerification)
 })
 
 //map edit
 app.put("/maps/edit", (req, res) => {
-  res.render("maps")
+  let userVerification = {user_id: req.session.id}
+  res.render("maps", userVerification)
 });
 
 app.use("/api/users", mapRoutes(knex));
 
 //user routes
 app.get("/users/login", (req, res) => {
-  res.render("login")
+  let userVerification = {user_id: req.session.id}
+  res.render("login", userVerification)
 });
 
+//register new user
 app.post("/register", (req, res) => {
   
   if (!req.body.reg_username || !req.body.reg_password) {
@@ -90,48 +97,62 @@ app.post("/register", (req, res) => {
   let hashed = req.body.reg_password;
   let hashedPassword = bcrypt.hashSync(hashed, 10);
 
-  knex("users").where("username", "!=", req.body.reg_username)
+  knex("users").insert(
+    knex.select()
+  )
+  knex("users").where("username", req.body.reg_username)
   .insert({
     username: req.body.reg_username,
     password: hashedPassword
   })
   .returning("id")
-
-  .then(() => {
+  .then((id) => {
     req.session.id = id
-    res.redirect("maps")
+    res.redirect("/")
   })
   .catch((err) => {
-    res.statusCode(400).send("Error, please go back and try again")
+    console.error(err)
+    // res.statusCode(400).send("Error, please go back and try again")
   })
 });
 
+
+//login page
 app.post("/login", (req, res) => {
   let userPass = req.body.password
-  knex
+  console.log("hello")
+  return knex
   .select("*")
   .from("users")
-  .where("username", "===", req.body.username)
+  .where("username", req.body.username)
   .then((userRow) => {
-    if (bcrypt.compareSync(userPass, password)) {
-      req.session.id = userRow.id
-      res.redirect("maps")
+    console.log(userRow[0].password)
+    if (bcrypt.compareSync(userPass, userRow[0].password)) {
+      console.log(userRow)
+      req.session.id = userRow[0].id
+      let userVerification = {user_id: req.session.id}
+      res.redirect("/")
     }
   })
-  res.statusCode(400).send("Error, please try again")
+  .catch((err) => {
+    res.status(500).send("Error, please try again" + err)
+    
+  })
 })
 
+//logout, clear cookies
 app.post("/logout", (req, res) => {
   res.clearCookie("id")
   delete req.session.id
   res.redirect("/")
 })
 
+//user profile page
 app.get("/users/:id", (req, res) => {
-  
-  res.render("profile")
+  let userVerification = {user_id: req.session.id}
+  res.render("profile", userVerification)
 })
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
-});
+})
