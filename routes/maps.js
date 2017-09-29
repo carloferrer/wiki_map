@@ -12,6 +12,8 @@ module.exports = (knex) => {
     .from("map_index")
     .then((results) => {
       res.json(results)
+      // Carlo Ferrer Debugging:
+      console.log(results)
     })
     .catch((err) => {
       console.error(err)
