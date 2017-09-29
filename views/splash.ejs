@@ -6,9 +6,9 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/nav.css" type="text/css"/>
+    <link rel="stylesheet" href="/styles/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/nav.css" type="text/css"/>
 
     <% include ./partials/_header %>
 
@@ -18,7 +18,25 @@
   <body>
     <h1>Welcome to Map Adventure!</h1>
 
+    <form action="/register" method="POST" style="margin:75px;">
+      <label for="reg_username">Enter your email:</label><br>
+      <input id="reg_username" type="reg_username" name="reg_username" placeholder="Username" style="width: 300px">
+      <br>
+      <label for="reg_password">Enter your password</label><br>
+      <input id="reg_password" type="reg_password" name="reg_password" placeholder="Password" style="width: 300px"><br><br>
+      <input type="submit" value="Submit"></form>
 
-      
+      <form action="/logout" method="POST">
+      <input type="submit" value="Logout">
+      </form>
+
+      <form action="/login" method="POST" style="margin:75px;">
+        <label for="username">Enter your email:</label><br>
+        <input id="username" type="username" name="username" placeholder="Username" style="width: 300px">
+        <br>
+        <label for="password">Enter your password</label><br>
+        <input id="password" type="password" name="password" placeholder="Password" style="width: 300px"><br><br>
+        <input type="submit" value="Submit"></form>
+
   </body>
 </html>
