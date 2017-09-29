@@ -1,8 +1,14 @@
-$active-folder: #FFEBCD;
+$active-tab: #FFEBCD;
 $inactive-tab: #F5CE94;
 
-.nav {
-  a {
-    background-color: $active-folder
-  }
+.main-folder {
+  height: 39em;
+  width: 48.55em;
+  margin: 7.8em auto 0 8.55em;
+  background-color: $active-tab;
+  border-radius: 0 5px 5px 5px;
+}
+
+.main-folder::before {
+  border: .1em solid #aaa;
 }
