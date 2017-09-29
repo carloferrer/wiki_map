@@ -6,6 +6,8 @@ $(document).ready(function() {
     $.get('http://localhost:8080/api'+window.location.pathname)
     .done(function(map) {
 
+
+
       initMap();
 
       console.log(map);
