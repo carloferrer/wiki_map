@@ -102,29 +102,34 @@ app.post("/register", (req, res) => {
   let hashed = req.body.reg_password;
   let hashedPassword = bcrypt.hashSync(hashed, 10);
 
-  knex("users").insert(
-    knex.select()
-  )
-  knex("users").where("username", req.body.reg_username)
-  .insert({
-    username: req.body.reg_username,
-    password: hashedPassword
-  })
-  .returning("id")
-  .then((id) => {
-    req.session.id = id
-    res.redirect("/")
-  })
-  .catch((err) => {
-    console.error(err)
-    // res.statusCode(400).send("Error, please go back and try again")
-  })
-});
+  knex
+  .select("*")
+  .from("users")
+  .where("username", req.body.reg_username)
+  .then((userRow) => {
+      if (userRow[0] && userRow[0].username === req.body.reg_username) {
+        return res.status(400).send("Username already exists")
+      } else {
+      knex("users")
+      .insert({
+        username: req.body.reg_username,
+        password: hashedPassword
+      })
+      .returning("id")
+      .then((id) => {
+        req.session.id = id
+        res.redirect("/")
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+    }
+  });
+})
 
 //login page
 app.post("/login", (req, res) => {
   let userPass = req.body.password
-  console.log("hello")
   return knex
   .select("*")
   .from("users")
