@@ -6,7 +6,7 @@ const router  = express.Router()
 module.exports = (knex) => {
 
   //Load map index
-  router.get("/", (req, res) => {
+  router.get("", (req, res) => {
     knex
     .select("*")
     .from("map_index")
