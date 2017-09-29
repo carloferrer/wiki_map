@@ -37,6 +37,12 @@ module.exports = (knex) => {
     })
   })
 
+  // //favorite a map
+  // router.post("/fav", (req, res) => {
+  //   knex("favourite")
+    
+  // })
+
   //create new map
   router.post("/create", (req, res) => {
     knex("map_index")

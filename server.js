@@ -116,7 +116,6 @@ app.post("/register", (req, res) => {
   })
 });
 
-
 //login page
 app.post("/login", (req, res) => {
   let userPass = req.body.password
@@ -126,9 +125,7 @@ app.post("/login", (req, res) => {
   .from("users")
   .where("username", req.body.username)
   .then((userRow) => {
-    console.log(userRow[0].password)
     if (bcrypt.compareSync(userPass, userRow[0].password)) {
-      console.log(userRow)
       req.session.id = userRow[0].id
       let userVerification = {user_id: req.session.id}
       res.redirect("/")
