@@ -3,11 +3,13 @@ $(document).ready(function() {
   loadMap();
 
   function loadMap(){
-    $.get('http://localhost:8080/api/maps/:id')
+    $.get('http://localhost:8080/api/maps/1')
+
     .done(function(map) {
       // for (let i = 0; i < maps.length; i++) {
       //   $('#map-list').append('<li>'+maps[i].title+'<br>');
       // }
+      console.log(map.title);
       console.log(map);
     })
     .fail(function(error) {
