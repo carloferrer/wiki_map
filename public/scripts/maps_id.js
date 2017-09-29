@@ -1,9 +1,11 @@
 $(document).ready(function() {
 
+  let path = window.location.pathname;
+
   loadMap();
 
   function loadMap(){
-    $.get('http://localhost:8080/api/maps/1')
+    $.get('http://localhost:8080/api'+path)
 
     .done(function(map) {
       // for (let i = 0; i < maps.length; i++) {
