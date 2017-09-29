@@ -62,8 +62,13 @@ app.get("/maps", (req, res) => {
 
 //map display
 app.get("/maps/:id", (req, res) => {
-  let userVerification = {user_id: req.session.id}
-  res.render("maps", userVerification)
+  // Carlo Ferrer Edit:
+  // Changed/added to object passed to res.render to include both user_id and map_id
+  let userAndMap = {
+    user_id: req.session.id,
+    map_id: req.params.id
+  }
+  res.render("maps", userAndMap)
 });
 
 //create map
@@ -88,7 +93,7 @@ app.get("/users/login", (req, res) => {
 
 //register new user
 app.post("/register", (req, res) => {
-  
+
   if (!req.body.reg_username || !req.body.reg_password) {
     res.status(400).send("Either the email or password field was empty. Please try again.")
     return;
@@ -138,6 +143,7 @@ app.post("/login", (req, res) => {
   })
   .catch((err) => {
     res.status(500).send("Error, please try again" + err)
+
   })
 })
 

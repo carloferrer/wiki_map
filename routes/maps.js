@@ -5,11 +5,28 @@ const router  = express.Router()
 
 module.exports = (knex) => {
 
+  //Load map index
+  router.get("", (req, res) => {
+    knex
+    .select("*")
+    .from("map_index")
+    .then((results) => {
+      res.json(results)
+      // Carlo Ferrer Debugging:
+      console.log(results)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  })
+
   //Load map
   router.get("/:id", (req, res) => {
     knex
     .select("*")
-    .from("maps_index")
+    // Carlo Ferrer Edit:
+    // Fixed .from("maps_index") to read .from("map_index")
+    .from("map_index")
     .where({
       id: [req.params.id]
     })
@@ -40,7 +57,7 @@ module.exports = (knex) => {
   // //favorite a map
   // router.post("/fav", (req, res) => {
   //   knex("favourite")
-    
+
   // })
 
   //create new map
