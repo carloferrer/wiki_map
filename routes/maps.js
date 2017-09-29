@@ -7,13 +7,14 @@ module.exports = (knex) => {
 
   //Load map index
   router.get("", (req, res) => {
+    // Carlo Ferre debugging:
+    console.log('\n***INSIDE LOAD MAP INDEX ROUTE***\n')
+
     knex
     .select("*")
     .from("map_index")
     .then((results) => {
       res.json(results)
-      // Carlo Ferrer Debugging:
-      console.log(results)
     })
     .catch((err) => {
       console.error(err)
@@ -22,16 +23,19 @@ module.exports = (knex) => {
 
   //Load map
   router.get("/:id", (req, res) => {
+    // Carlo Ferrer debugging:
+    console.log('\n***INSIDE LOAD MAP ROUTE***\n')
+    console.log('\n***req.params.id = '+req.params.id+'***\n')
     knex
     .select("*")
     // Carlo Ferrer Edit:
     // Fixed .from("maps_index") to read .from("map_index")
     .from("map_index")
     .where({
-      id: [req.params.id]
+      id: req.params.id
     })
     .then((results) => {
-      res.json(results)
+      res.json(results[0])
     })
     .catch((err) => {
       console.error(err)

@@ -1,22 +1,96 @@
 $(document).ready(function() {
 
-  let path = window.location.pathname;
-
   loadMap();
 
-  function loadMap(){
-    $.get('http://localhost:8080/api'+path)
-
+  function loadMap() {
+    $.get('http://localhost:8080/api'+window.location.pathname)
     .done(function(map) {
-      // for (let i = 0; i < maps.length; i++) {
-      //   $('#map-list').append('<li>'+maps[i].title+'<br>');
-      // }
+
+      initMap();
+
+      console.log(map.id);
       console.log(map.title);
-      console.log(map);
+
     })
     .fail(function(error) {
       console.error(error);
     });
   }
+
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -33.8688, lng: 151.2195},
+    zoom: 13,
+    mapTypeId: 'roadmap'
+  });
+
+  // Create the search box and link it to the UI element.
+  var input = document.getElementById('pac-input');
+  var searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener('bounds_changed', function() {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  var markers = [];
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener('places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+
+    // Clear out the old markers.
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+    markers = [];
+
+    // For each place, get the icon, name and location.
+    var bounds = new google.maps.LatLngBounds();
+    places.forEach(function(place) {
+      if (!place.geometry) {
+        console.log("Returned place contains no geometry");
+        return;
+      }
+      var icon = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      };
+
+      // Create a marker for each place.
+      var newMark = new google.maps.Marker({
+        map: map,
+        icon: icon,
+        title: place.name,
+        position: place.geometry.location
+      });
+
+      google.maps.event.addListener(newMark,'click',function(){
+        console.log(place.geometry.location.lat()+' '+place.geometry.location.lng());
+      });
+
+      markers.push(newMark);
+
+
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+
+    map.fitBounds(bounds);
+  });
+  }
+
 
 });
