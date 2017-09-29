@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
   loadMap();
+  editMap();
 
   function loadMap() {
     $.get('http://localhost:8080/api'+window.location.pathname)
@@ -16,6 +17,12 @@ $(document).ready(function() {
     })
     .fail(function(error) {
       console.error(error);
+    });
+  }
+
+  function editMap( ) {
+    $('#map-edit').on('click', function() {
+      console.log('CLICKED THE EDIT BUTTON!');
     });
   }
 
@@ -99,18 +106,18 @@ $(document).ready(function() {
           console.log("Returned place contains no geometry");
           return;
         }
-        var icon = {
-          url: place.icon,
-          size: new google.maps.Size(71, 71),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(25, 25)
-        };
+        // var icon = {
+        //   url: place.icon,
+        //   size: new google.maps.Size(71, 71),
+        //   origin: new google.maps.Point(0, 0),
+        //   anchor: new google.maps.Point(17, 34),
+        //   scaledSize: new google.maps.Size(25, 25)
+        // };
 
         // Create a marker for each place.
         var newMark = new google.maps.Marker({
           map: map,
-          icon: icon,
+          // icon: icon,
           title: place.name,
           position: place.geometry.location
         });
