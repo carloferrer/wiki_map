@@ -13,7 +13,7 @@ const randoTitle32 = faker.lorem.words();
 exports.seed = function(knex, Promise) {
   const seedUsers = function () {
     return knex('users').insert([
-      {username: randoUsername1, password: faker.internet.password()},
+      {username: randoUsername1, password: admin,
       {username: randoUsername2, password: faker.internet.password()},
       {username: randoUsername3, password: faker.internet.password()},
     ], 'id');
