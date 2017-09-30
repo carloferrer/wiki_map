@@ -2,10 +2,9 @@ $(document).ready(function() {
 
   loadMap();
 
-
   var editMode = false;
-  var infowindow;
-  var map;
+  var map, infowindow, markerID;
+  var markers = [];
 
   function loadMap() {
     $.get('http://localhost:8080/api'+window.location.pathname)
@@ -55,6 +54,7 @@ $(document).ready(function() {
     // addPoints(google.maps);
 
     editMapMode();
+    // addMarker();
 
       google.maps.event.addListener(map, 'click', function(event) {
         if(editMode) {
@@ -74,12 +74,24 @@ $(document).ready(function() {
   //   // }
   // }
 
-  function placeMarker(location) {
+  //https://stackoverflow.com/questions/8521766/google-maps-api-3-remove-selected-marker-only
+
+  function placeMarker(Gpoint) {
 
     var marker = new google.maps.Marker({
-        position: location,
+        position: Gpoint,
         map: map,
         title: location.name,
+        animation: google.maps.Animation.DROP
+    });
+
+    map.panTo(Gpoint);
+    markerID = marker.__gm_id;
+    markers[markerID] = marker;
+
+    google.maps.event.addListener(marker, "rightclick", function (point) {
+      markerID = this.__gm_id;
+      delMarker(markerID);
     });
 
     google.maps.event.addListener(marker, 'click', function() {
@@ -87,6 +99,11 @@ $(document).ready(function() {
       infowindow.open(map, this);
       console.log('Point located here: ', location.lat(), location.lng());
     });
+
+    function delMarker(markerID) {
+      marker = markers[markerID];
+      marker.setMap(null);
+    }
   }
 
   function geolocate(map, geolocation) {
@@ -130,7 +147,7 @@ $(document).ready(function() {
       searchBox.setBounds(map.getBounds());
     });
 
-    var markers = [];
+    markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
 
