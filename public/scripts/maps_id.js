@@ -35,11 +35,9 @@ $(document).ready(function() {
       if (!editMode) {
         editMode = true;
         $('#map-edit').text('NOW CLICK MAP TO ADD MARKER');
-        console.log('IN EDIT MODE!');
 
       } else {
         editMode = false;
-        console.log('LEFT EDIT MODE! NO LONGER EDITING!');
         $('#map-edit').text('CLICK HERE TO ADD MARKER');
       }
     });
