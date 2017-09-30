@@ -3,6 +3,7 @@ $active-tab: #FFEBCD;
 $inactive-tab: #F5CE94;
 $logo-red: #FF0000;
 $logo-orange: #FF6800;
+$logo-blue: #00DAD5;
 
 #nav-bar {
   // background-color: #337512;
@@ -20,8 +21,8 @@ $logo-orange: #FF6800;
 }
 
 #nav-bar h1 {
-  color: $logo-orange;
-  text-shadow: -1px 0 $logo-red, 0 1px $logo-red, 1px 0 $logo-red, 0 -1px $logo-red;
+  color: $logo-red;
+  text-shadow: -1px 0 $logo-blue, 0 1px $logo-blue, 1px 0 $logo-blue, 0 -1px $logo-blue;
   text-align: center;
   float: left;
 }
