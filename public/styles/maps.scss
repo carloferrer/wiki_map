@@ -6,7 +6,6 @@
   height: 500px;
   width: 100%;
 }*/
-
 html {
   box-sizing: border-box;
 }
@@ -16,12 +15,12 @@ html {
 
 #point-list {
   position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 50%;
+  top: 11.5;
+  right: 11.5;
+  height: 65%;
+  width: 70%;
   background-color: tomato;
-  z-index: -1;
+  z-index: 1000;
 }
 
 #map {

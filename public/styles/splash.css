@@ -115,4 +115,15 @@ main {
   top: 10em;
   left: 19em; }
 
+.register {
+  padding: 1em; }
+
+.login {
+  padding: 1em; }
+
+.paper {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
 /*# sourceMappingURL=splash.css.map */
