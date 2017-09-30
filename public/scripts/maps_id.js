@@ -63,58 +63,8 @@ $(document).ready(function() {
       });
   }
 
-  // function addPoints(map) {
-  //   // if (editMode) {
-  //     map.event.addListener(map, 'click', function(event) {
-  //       placeMarker(event.latLng);
-  //       console.log(editMode);
-  //       console.log('PLACE MARKER ATTEMPT');
-  //     });
-  //   // }
-  // }
 
-  //https://stackoverflow.com/questions/8521766/google-maps-api-3-remove-selected-marker-only
 
-  function placeMarker(Gpoint) {
-
-    var marker = new google.maps.Marker({
-        position: Gpoint,
-        map: map,
-        title: location.name,
-        animation: google.maps.Animation.DROP
-    });
-
-    map.panTo(Gpoint);
-
-    console.log('MARKER ID ARRAY BEFORE:'+markerID.length);
-    console.log('MARKERS OBJECT LENGTH BEFORE:'+Object.keys(markers).length);
-
-    markerID.push(marker.__gm_id);
-    markers[markerID[markerID.length-1]] = marker;
-
-    console.log('MARKER ID ARRAY AFTER:'+markerID.length);
-    console.log('MARKERS OBJECT LENGTH AFTER:'+Object.keys(markers).length);
-
-    google.maps.event.addListener(marker, "rightclick", function () {
-      delMarker(markerID[markerID.length-1]);
-      markerID.splice(markerID.indexOf(markerID.length));
-      console.log('MARKER ID ARRAY AFTER DELETE:'+markerID.length);
-      console.log('MARKERS OBJECT LENGTH AFTER DELETE:'+Object.keys(markers).length);
-    });
-
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent('Coordinates of point:\n'+(location.lat()).toString()+'\n'+(location.lng()).toString());
-      infowindow.open(map, this);
-      console.log('Point located here: ', location.lat(), location.lng());
-    });
-
-    function delMarker(markerID) {
-      marker = markers[markerID];
-      marker.setMap(null);
-    }
-
-    editMode = false;
-  }
 
   function geolocate(map, geolocation) {
     infoWindow = new google.maps.InfoWindow;
@@ -221,3 +171,55 @@ $(document).ready(function() {
 });
 
 
+  // function addPoints(map) {
+  //   // if (editMode) {
+  //     map.event.addListener(map, 'click', function(event) {
+  //       placeMarker(event.latLng);
+  //       console.log(editMode);
+  //       console.log('PLACE MARKER ATTEMPT');
+  //     });
+  //   // }
+  // }
+
+  //https://stackoverflow.com/questions/8521766/google-maps-api-3-remove-selected-marker-only
+
+  // function placeMarker(location) {
+
+  //   var marker = new google.maps.Marker({
+  //       position: location,
+  //       map: map,
+  //       title: location.name,
+  //       animation: google.maps.Animation.DROP
+  //   });
+
+  //   map.panTo(location);
+
+  //   console.log('MARKER ID ARRAY BEFORE:'+markerID.length);
+  //   console.log('MARKERS OBJECT LENGTH BEFORE:'+Object.keys(markers).length);
+
+  //   markerID.push(marker.__gm_id);
+  //   markers[markerID[markerID.length-1]] = marker;
+
+  //   console.log('MARKER ID ARRAY AFTER:'+markerID.length);
+  //   console.log('MARKERS OBJECT LENGTH AFTER:'+Object.keys(markers).length);
+
+  //   google.maps.event.addListener(marker, "rightclick", function () {
+  //     delMarker(this.__gm_id);
+  //     markerID.splice(markerID.indexOf(markerID.length));
+  //     console.log('MARKER ID ARRAY AFTER DELETE:'+markerID.length);
+  //     console.log('MARKERS OBJECT LENGTH AFTER DELETE:'+Object.keys(markers).length);
+  //   });
+
+  //   google.maps.event.addListener(marker, 'click', function() {
+  //     infowindow.setContent('Coordinates of point:\n'+(location.lat()).toString()+'\n'+(location.lng()).toString());
+  //     infowindow.open(map, this);
+  //     console.log('Point located here: ', location.lat(), location.lng());
+  //   });
+
+  //   function delMarker(markerID) {
+  //     marker = markers[markerID];
+  //     marker.setMap(null);
+  //   }
+
+  //   editMode = false;
+  // }
