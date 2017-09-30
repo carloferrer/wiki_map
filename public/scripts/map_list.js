@@ -21,14 +21,13 @@ $(document).ready(function() {
 
   function createNewMap(newTitle) {
       $.post('http://localhost:8080/api/maps/create', newTitle)
-      .done(function(results) {
-        console.log(results);
-        loadMapIndex();
+      .done(function() {
       })
       .fail(function(error) {
         console.error(error);
       });
 
+      loadMapIndex();
   }
 
   function formSubmission() {

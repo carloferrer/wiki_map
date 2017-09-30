@@ -58,18 +58,24 @@ module.exports = (knex) => {
 
   //create new map
   router.post("/create", (req, res) => {
-    // Carlo Debuggin:
-    console.log('***INSIDE CREATE MAP ROUTE***');
+
+
     if (!req.body.map_title) {
       res.status(400);
       console.log('error: invalid request: no data in POST body');
       return;
     }
-    knex("map_index")
-    .insert({
-      title: req.body.map_title,
-      creator_id: req.session.id
+
+    console.log(req.body.map_title, req.session.id);
+
+    return knex("map_index")
+    .insert(
+    { title: req.body.map_title, creator_id: req.session.id }
+    , 'id')
+    .catch((err) => {
+      console.error(err)
     })
+
   })
 
   //add point to map
