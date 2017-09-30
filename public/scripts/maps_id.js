@@ -3,14 +3,13 @@ $(document).ready(function() {
   loadMap();
 
   var editMode = false;
-  var map, infowindow, markerID;
+  var map, infowindow;
+  var markerID = [];
   var markers = [];
 
   function loadMap() {
     $.get('http://localhost:8080/api'+window.location.pathname)
     .done(function(map) {
-
-
 
       initMap();
 
@@ -86,12 +85,15 @@ $(document).ready(function() {
     });
 
     map.panTo(Gpoint);
-    markerID = marker.__gm_id;
-    markers[markerID] = marker;
+    console.log('MARKER ID ARRAY BEFORE:'+markerID.length);
+    markerID.push(marker.__gm_id);
+    console.log('MARKER ID ARRAY AFTER:'+markerID.length);
+    markers[markerID[markerID.length-1]] = marker;
 
-    google.maps.event.addListener(marker, "rightclick", function (point) {
-      markerID = this.__gm_id;
-      delMarker(markerID);
+    google.maps.event.addListener(marker, "rightclick", function () {
+      delMarker(markerID[marker.length-1]);
+      markerID.splice(markerID.indexOf(marker.length));
+      console.log('MARKER ID ARRAY AFTER DELETE:'+markerID.length);
     });
 
     google.maps.event.addListener(marker, 'click', function() {
@@ -104,6 +106,8 @@ $(document).ready(function() {
       marker = markers[markerID];
       marker.setMap(null);
     }
+
+    editMode = false;
   }
 
   function geolocate(map, geolocation) {
@@ -180,18 +184,19 @@ $(document).ready(function() {
         // };
 
         // Create a marker for each place.
-        var newMark = new google.maps.Marker({
+        var marker = new google.maps.Marker({
           map: map,
           // icon: icon,
           title: place.name,
-          position: place.geometry.location
+          position: place.geometry.location,
+          animation: google.maps.Animation.DROP
         });
 
-        google.maps.event.addListener(newMark,'click',function(){
+        google.maps.event.addListener(marker,'click',function(){
           console.log(place.geometry.location.lat()+' '+place.geometry.location.lng());
         });
 
-        markers.push(newMark);
+        markers.push(marker);
 
 
         if (place.geometry.viewport) {
