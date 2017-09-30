@@ -2,6 +2,7 @@ $(document).ready(function() {
 
   var path = window.location.pathname;
 
+
   loadMap();
 
   var editMode = false;
@@ -30,7 +31,11 @@ $(document).ready(function() {
     }
   }
 
-  function editMapMode( ) {
+  // function savePoint() {
+  //   let
+  // }
+
+  function editMapMode() {
     $('#map-edit').on('click', function() {
       if (!editMode) {
         editMode = true;
