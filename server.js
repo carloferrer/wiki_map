@@ -83,7 +83,7 @@ app.put("/maps/edit", (req, res) => {
   res.render("maps", userVerification)
 });
 
-app.use("/api/users", mapRoutes(knex));
+app.use("/api/users", usersRoutes(knex));
 
 //user routes
 app.get("/users/login", (req, res) => {
@@ -156,6 +156,7 @@ app.post("/logout", (req, res) => {
 
 //user profile page
 app.get("/users/:id", (req, res) => {
+  
   let userVerification = {user_id: req.session.id}
   res.render("profile", userVerification)
 })
