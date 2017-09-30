@@ -5,7 +5,7 @@ $(document).ready(function() {
   var editMode = false;
   var map, infowindow;
   var markerID = [];
-  var markers = [];
+  var markers = {};
 
   function loadMap() {
     $.get('http://localhost:8080/api'+window.location.pathname)
@@ -88,7 +88,8 @@ $(document).ready(function() {
     console.log('MARKER ID ARRAY BEFORE:'+markerID.length);
     markerID.push(marker.__gm_id);
     console.log('MARKER ID ARRAY AFTER:'+markerID.length);
-    markers[markerID[markerID.length-1]] = marker;
+    markers[markerID.length-1] = marker;
+    console.log('MARKERS** ARRAY AFTER:'+markers.length);
 
     google.maps.event.addListener(marker, "rightclick", function () {
       delMarker(markerID[marker.length-1]);
