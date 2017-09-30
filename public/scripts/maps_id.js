@@ -143,7 +143,7 @@ $(document).ready(function() {
       searchBox.setBounds(map.getBounds());
     });
 
-    markers = [];
+    var searchMarkers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
 
@@ -155,10 +155,10 @@ $(document).ready(function() {
       }
 
       // Clear out the old markers.
-      markers.forEach(function(marker) {
+      searchMarkers.forEach(function(marker) {
         marker.setMap(null);
       });
-      markers = [];
+      searchMarkers = [];
 
       // For each place, get the icon, name and location.
       var bounds = new google.maps.LatLngBounds();
@@ -188,7 +188,7 @@ $(document).ready(function() {
           console.log(place.geometry.location.lat()+' '+place.geometry.location.lng());
         });
 
-        markers.push(marker);
+        searchMarkers.push(marker);
 
 
         if (place.geometry.viewport) {
