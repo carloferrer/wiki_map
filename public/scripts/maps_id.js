@@ -26,6 +26,7 @@ $(document).ready(function() {
       });
     } else {
       $('#map-title').text('CREATE NEW MAP');
+        initMap();
     }
   }
 
@@ -53,17 +54,9 @@ $(document).ready(function() {
 
     geolocate(map, navigator.geolocation);
     searchPlace(map);
-    // addPoints(google.maps);
 
     editMapMode();
-    // addMarker();
 
-      // google.maps.event.addListener(map, 'click', function(event) {
-      //   if(editMode) {
-      //     placeMarker(event.latLng);
-      //     console.log('LAT LNG: ',event.latLng.lat(),event.latLng.lng());
-      //   }
-      // });
 
     // All of the below borrowed from http://jsfiddle.net/fatihacet/CKegk/
     var addMarker = google.maps.event.addListener(map, 'click', function(e) {

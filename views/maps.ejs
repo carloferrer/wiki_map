@@ -4,20 +4,28 @@
     <title>MAP <%=map_id%></title>
     <link rel="stylesheet" href="/styles/maps.css" type="text/css" />
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <!-- <script type="text/javascript" src="../routes/maps.js"></script> -->
     <script type="text/javascript" src="/scripts/maps_id.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQKTN_0e8RdueqYXuKZK99uNFndl6TN6k&libraries=places"></script>
     <!-- <link rel="stylesheet" href="/vendor/nav.css" type="text/css"/> -->
 
-    <% include ./partials/_header %>
   </head>
 
   <body>
+    <!-- <% include ./partials/_header %> -->
     <h1 id="map-title">MAP ID: <%=map_id%></h1>
     <h2 id="map-edit">CLICK TO ADD SINGLE POINT</h2>
     <input id="pac-input" class="controls" type="text" placeholder="Search new region to refocus map boundary!">
     <div id="map"></div>
+
     <div id="point-list">LIST OF POINTS HERE</div>
+
+    <div id="point-info">
+      <div class="edit-pic">point: edit-pic</div>
+      <div class="edit-title">point: edit-title</div>
+      <div class="edit-coords">point: edit-coords</div>
+      <div class="edit-url">point: edit-url</div>
+      <div class="edit-desc">point: edit-desc</div>
+    </div>
   </body>
 
 

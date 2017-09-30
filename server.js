@@ -64,9 +64,12 @@ app.get("/maps", (req, res) => {
 // Changed from app.post to app.get b/c need to load map creation page - submission of map creation, i.e., .post, is handled by maps.js under router.post('/create') etc.
 // load map creation page
 app.get("/maps/create", (req, res) => {
-  let userVerification = {user_id: req.session.id}
-  res.render("maps", userVerification)
-})
+  let userAndMap = {
+    user_id: req.session.id,
+    map_id: 'CREATE'
+  }
+  res.render("maps", userAndMap)
+});
 
 //map display
 app.get("/maps/:id", (req, res) => {
