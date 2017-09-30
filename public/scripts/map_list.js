@@ -15,9 +15,6 @@ $(document).ready(function() {
     });
   }
 
-  // function createMap() {
-  //   $.post('http://localhost:8080/api/maps/create')
-  //   .done(function())
-  // }
+
 
 });

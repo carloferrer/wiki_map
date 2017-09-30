@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  var path = window.location.pathname;
+
   loadMap();
 
   var editMode = false;
@@ -8,35 +10,39 @@ $(document).ready(function() {
   var markers = {};
 
   function loadMap() {
-    $.get('http://localhost:8080/api'+window.location.pathname)
-    .done(function(map) {
+    if (path != '/maps/create') {
+      console.log(path);
+      $.get('http://localhost:8080/api'+path)
+      .done(function(map) {
 
-      initMap();
+        initMap();
 
-      console.log(map);
-      reloadDetails(map);
+        console.log(map);
+        $('#map-title').text('Map: '+map.title);
 
-    })
-    .fail(function(error) {
-      console.error(error);
-    });
+      })
+      .fail(function(error) {
+        console.error(error);
+      });
+    } else {
+      $('#map-title').text('CREATE NEW MAP');
+        initMap();
+    }
   }
 
   function editMapMode( ) {
     $('#map-edit').on('click', function() {
       if (!editMode) {
         editMode = true;
+        $('#map-edit').text('NOW CLICK MAP TO ADD MARKER');
         console.log('IN EDIT MODE!');
 
       } else {
         editMode = false;
         console.log('LEFT EDIT MODE! NO LONGER EDITING!');
+        $('#map-edit').text('CLICK HERE TO ADD MARKER');
       }
     });
-  }
-
-  function reloadDetails(map) {
-    $('#map-title').text('Map: '+map.title);
   }
 
   function initMap() {
@@ -50,32 +56,29 @@ $(document).ready(function() {
 
     geolocate(map, navigator.geolocation);
     searchPlace(map);
-    // addPoints(google.maps);
 
     editMapMode();
-    // addMarker();
 
-      // google.maps.event.addListener(map, 'click', function(event) {
-      //   if(editMode) {
-      //     placeMarker(event.latLng);
-      //     console.log('LAT LNG: ',event.latLng.lat(),event.latLng.lng());
-      //   }
-      // });
 
     // All of the below borrowed from http://jsfiddle.net/fatihacet/CKegk/
     var addMarker = google.maps.event.addListener(map, 'click', function(e) {
       var lat = e.latLng.lat(); // lat of clicked point
       var lng = e.latLng.lng(); // lng of clicked point
       var markerId = getMarkerUniqueId(lat, lng); // an that will be used to cache this marker in markers object.
-      var marker = new google.maps.Marker({
-          position: getLatLng(lat, lng),
-          map: map,
-          id: 'marker_' + markerId
-      });
-      markers[markerId] = marker; // cache marker in markers object
-      bindMarkerEvents(marker); // bind right click event to marker
+      if(editMode) {
+        var marker = new google.maps.Marker({
+            position: getLatLng(lat, lng),
+            map: map,
+            id: 'marker_' + markerId
+        });
+        markers[markerId] = marker; // cache marker in markers object
+        bindMarkerEvents(marker); // bind right click event to marker
+        $('.edit-coord-x').text('Latitude: '+lat);
+        $('.edit-coord-y').text('Longitude: '+lng);
+        editMode = false;
+        $('#map-edit').text('CLICK HERE TO ADD MARKER');
+      }
     });
-
     var getMarkerUniqueId = function(lat, lng) {
         return lat + '_' + lng;
     };
@@ -140,7 +143,7 @@ $(document).ready(function() {
       searchBox.setBounds(map.getBounds());
     });
 
-    markers = [];
+    var searchMarkers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
 
@@ -152,10 +155,10 @@ $(document).ready(function() {
       }
 
       // Clear out the old markers.
-      markers.forEach(function(marker) {
+      searchMarkers.forEach(function(marker) {
         marker.setMap(null);
       });
-      markers = [];
+      searchMarkers = [];
 
       // For each place, get the icon, name and location.
       var bounds = new google.maps.LatLngBounds();
@@ -185,7 +188,7 @@ $(document).ready(function() {
           console.log(place.geometry.location.lat()+' '+place.geometry.location.lng());
         });
 
-        markers.push(marker);
+        searchMarkers.push(marker);
 
 
         if (place.geometry.viewport) {

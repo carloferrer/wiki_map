@@ -13,9 +13,7 @@ $(document).ready(function() {
       console.error(error);
     })
   }
-
-  loadUserData()
-
+  
   function loadMapIndex() {
     $.get("http://localhost:8080/api/maps"+window.location.pathname)
     .done(function(maps) {
@@ -25,6 +23,9 @@ $(document).ready(function() {
       }
     })
   }
+
+
+  loadUserData()
 
   loadMapIndex()
 

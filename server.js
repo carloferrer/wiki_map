@@ -60,6 +60,17 @@ app.get("/maps", (req, res) => {
   res.render("map_list", userVerification)
 });
 
+// Carlo Ferrer Edit:
+// Changed from app.post to app.get b/c need to load map creation page - submission of map creation, i.e., .post, is handled by maps.js under router.post('/create') etc.
+// load map creation page
+app.get("/maps/create", (req, res) => {
+  let userAndMap = {
+    user_id: req.session.id,
+    map_id: 'CREATE'
+  }
+  res.render("maps", userAndMap)
+});
+
 //map display
 app.get("/maps/:id", (req, res) => {
   // Carlo Ferrer Edit:
@@ -70,12 +81,6 @@ app.get("/maps/:id", (req, res) => {
   }
   res.render("maps", userAndMap)
 });
-
-//create map
-app.post("/maps/create", (req, res) => {
-  let userVerification = {user_id: req.session.id}
-  res.render("maps", userVerification)
-})
 
 //map edit
 app.put("/maps/edit", (req, res) => {
@@ -156,9 +161,10 @@ app.post("/logout", (req, res) => {
 
 //user profile page
 app.get("/users/:id", (req, res) => {
-  
   let userVerification = {user_id: req.session.id}
-  res.render("profile", userVerification)
+  if (req.session.id) {
+    return res.render("profile", userVerification)
+  }
 })
 
 app.listen(PORT, () => {
