@@ -19,18 +19,20 @@
     <section class='main-folder'>
       <section class='form'>
         <form action="/register" method="POST" style="margin:75px;">
-          <label for="reg_username">Enter your email:</label><br>
+          <label for="reg_username">Enter your user name:</label><br>
           <input id="reg_username" type="reg_username" name="reg_username" placeholder="Username" style="width: 300px">
           <br>
           <label for="reg_password">Enter your password</label><br>
           <input id="reg_password" type="reg_password" name="reg_password" placeholder="Password" style="width: 300px"><br><br>
-          <input type="submit" value="Submit"></form>
+          <input type="submit" value="Submit">
+        </form>
 
           <form action="/logout" method="POST">
             <input type="submit" value="Logout">
-        </form>
+         </form>
+         
         <form action="/login" method="POST" style="margin:75px;">
-          <label for="username">Enter your email:</label><br>
+          <label for="username">Enter your user name:</label><br>
           <input id="username" type="username" name="username" placeholder="Username" style="width: 300px">
           <br>
           <label for="password">Enter your password</label><br>
@@ -40,7 +42,5 @@
       </section>
     </section>
 
-
-    <% include ./partials/_login %>
   </body>
 </html>

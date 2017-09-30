@@ -18,6 +18,20 @@ module.exports = (knex) => {
     })
   })
 
+  //edit user profile
+  router.put("/edit/:id", (req, res) => {
+    knex("users").where("id", "=", req.params.id)
+    .update("username", req.body.username)
+    .update("about_me", req.body.about)
+    .then(() => {
+      res.statusCode(200).send()
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  })
+
+
   return router;
 }
 

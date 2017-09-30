@@ -44,6 +44,7 @@ exports.seed = function(knex, Promise) {
     ]);
   };
 
+
   return knex('favourite').del()
   .then(function() { return knex('map_index').del(); })
   .then(function() { return knex('users').del(); })
@@ -51,7 +52,7 @@ exports.seed = function(knex, Promise) {
     return seedUsers()
         .then(function(userid) {
           return seedMaps(userid).then(function(mapid) {
-            return seedFave(mapid, userid);
+            return seedFave(mapid, userid)
           });
         })
         .catch(function (err) {
