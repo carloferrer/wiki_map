@@ -13,19 +13,21 @@
   <body>
     <!-- <% include ./partials/_header %> -->
     <h1 id="map-title">MAP ID: <%=map_id%></h1>
-    <h2 id="map-edit">CLICK TO ADD SINGLE POINT</h2>
+    <h2 id="map-edit">CLICK HERE TO ADD MARKER</h2>
     <input id="pac-input" class="controls" type="text" placeholder="Search new region to refocus map boundary!">
-    <div id="map"></div>
 
-    <div id="point-list">LIST OF POINTS HERE</div>
+    <div id='map-n-points'>
+      <div id="map"></div>
 
-    <div id="point-info">
-      <div class="edit-pic">point: edit-pic</div>
-      <div class="edit-title">point: edit-title</div>
-      <div class="edit-coords">point: edit-coords</div>
-      <div class="edit-url">point: edit-url</div>
-      <div class="edit-desc">point: edit-desc</div>
-      <h3 id="save-point">CLICK HERE TO SAVE POINT</h3>
+      <div id="point-info">
+        <div class="edit-pic">Picture: {TBD}</div>
+        <div class="edit-title">Title: {TEXT INPUT}</div>
+        <div class="edit-coord-x">Latitude: {ADD POINT ON MAP}</div>
+        <div class="edit-coord-y">Longitude: {ADD POINT ON MAP}</div>
+        <div class="edit-url">URL: {TEXT INPUT}</div>
+        <div class="edit-desc">Description: {TEXT INPUT}</div>
+        <h3 id="save-point">CLICK HERE TO SAVE POINT</h3>
+      </div>
     </div>
   </body>
 

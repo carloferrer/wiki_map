@@ -34,11 +34,13 @@ $(document).ready(function() {
     $('#map-edit').on('click', function() {
       if (!editMode) {
         editMode = true;
+        $('#map-edit').text('NOW CLICK MAP TO ADD MARKER');
         console.log('IN EDIT MODE!');
 
       } else {
         editMode = false;
         console.log('LEFT EDIT MODE! NO LONGER EDITING!');
+        $('#map-edit').text('CLICK HERE TO ADD MARKER');
       }
     });
   }
@@ -71,8 +73,10 @@ $(document).ready(function() {
         });
         markers[markerId] = marker; // cache marker in markers object
         bindMarkerEvents(marker); // bind right click event to marker
-        $('.edit-coords').text(lat+'_'+lng);
+        $('.edit-coord-x').text('Latitude: '+lat);
+        $('.edit-coord-y').text('Longitude: '+lng);
         editMode = false;
+        $('#map-edit').text('CLICK HERE TO ADD MARKER');
       }
     });
     var getMarkerUniqueId = function(lat, lng) {

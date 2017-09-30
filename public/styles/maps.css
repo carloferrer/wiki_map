@@ -10,19 +10,21 @@ html {
   box-sizing: inherit;
 }
 
-#point-list {
-  position: absolute;
-  top: 0;
+#map-n-points {
+  width: 100%;
+  overflow:hidden;
+}
+
+#point-info {
+  float: right;
+  width:30%;
   right: 0;
-  height: 100%;
-  width: 50%;
-  background-color: tomato;
-  z-index: -1;
 }
 
 #map {
+  float:left;
   height: 500px;
-  width: 50%;
+  width: 70%;
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
@@ -82,7 +84,7 @@ html, body {
   font-weight: 300;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 50%;
+  width: 70%;
 }
 
 #pac-input:focus {
