@@ -67,15 +67,17 @@ $(document).ready(function() {
       var lat = e.latLng.lat(); // lat of clicked point
       var lng = e.latLng.lng(); // lng of clicked point
       var markerId = getMarkerUniqueId(lat, lng); // an that will be used to cache this marker in markers object.
-      var marker = new google.maps.Marker({
-          position: getLatLng(lat, lng),
-          map: map,
-          id: 'marker_' + markerId
-      });
-      markers[markerId] = marker; // cache marker in markers object
-      bindMarkerEvents(marker); // bind right click event to marker
+      if(editMode) {
+        var marker = new google.maps.Marker({
+            position: getLatLng(lat, lng),
+            map: map,
+            id: 'marker_' + markerId
+        });
+        markers[markerId] = marker; // cache marker in markers object
+        bindMarkerEvents(marker); // bind right click event to marker
+        editMode = false;
+      }
     });
-
     var getMarkerUniqueId = function(lat, lng) {
         return lat + '_' + lng;
     };
