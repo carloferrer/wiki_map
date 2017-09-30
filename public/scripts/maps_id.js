@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   loadMap();
-  editMapMode();
+
 
   var editMode = false;
   var infowindow;
@@ -54,22 +54,25 @@ $(document).ready(function() {
     searchPlace(map);
     // addPoints(google.maps);
 
-    google.maps.event.addListener(map, 'click', function(event) {
-      placeMarker(event.latLng);
-      console.log('LAT LNG: ',event.latLng.lat(),event.latLng.lng());
-    });
+    editMapMode();
 
-  }
-
-  function addPoints(map) {
-    // if (editMode) {
-      map.event.addListener(map, 'click', function(event) {
-        placeMarker(event.latLng);
-        console.log(editMode);
-        console.log('PLACE MARKER ATTEMPT');
+      google.maps.event.addListener(map, 'click', function(event) {
+        if(editMode) {
+          placeMarker(event.latLng);
+          console.log('LAT LNG: ',event.latLng.lat(),event.latLng.lng());
+        }
       });
-    // }
   }
+
+  // function addPoints(map) {
+  //   // if (editMode) {
+  //     map.event.addListener(map, 'click', function(event) {
+  //       placeMarker(event.latLng);
+  //       console.log(editMode);
+  //       console.log('PLACE MARKER ATTEMPT');
+  //     });
+  //   // }
+  // }
 
   function placeMarker(location) {
 
