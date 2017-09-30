@@ -1,0 +1,201 @@
+body {
+  background-image: url("https://wallpapercave.com/wp/i9E5wdU.jpg"); }
+
+.main-folder {
+  height: 39em;
+  width: 48.55em;
+  margin: 7.8em auto 0 8.55em;
+  background-color: #FFEBCD;
+  border-radius: 0 5px 5px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.main-folder::before {
+  border: .1em solid #aaa; }
+
+.paper {
+  background-color: white;
+  padding: 1em;
+  height: 88%;
+  width: 90%;
+  border-radius: 2px; }
+
+#nav-bar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  opacity: 100%; }
+
+#nav-bar .logo {
+  height: 80px;
+  width: 80px;
+  margin: 20px;
+  float: left; }
+
+#nav-bar h1 {
+  color: #FF0000;
+  text-shadow: -1px 0 #00DAD5, 0 1px #00DAD5, 1px 0 #00DAD5, 0 -1px #00DAD5;
+  text-align: center;
+  float: left; }
+
+/**
+ * Slanted tabs with CSS 3D transforms
+ * See http://lea.verou.me/2013/10/slanted-tabs-with-css-3d-transforms/
+ */
+.left {
+  position: absolute;
+  left: 9em;
+  bottom: .5em; }
+
+nav a {
+  position: relative;
+  width: 50px;
+  display: inline-flex;
+  padding: 30em 1em 1em;
+  color: inherit;
+  text-decoration: none;
+  margin: 80px -7px 0 -7px; }
+
+nav .profile {
+  position: absolute;
+  left: 8px; }
+
+nav a div {
+  position: absolute;
+  top: 25px; }
+
+nav a::before,
+main {
+  border: .1em solid #aaa; }
+
+nav a::before {
+  content: '';
+  /* To generate the box */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -.8em;
+  left: 0;
+  z-index: -1;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  padding: 5px;
+  background: #F5CE94;
+  box-shadow: 0 2px rgba(255, 255, 255, 0.5) inset;
+  transform: perspective(5px) rotateX(2deg);
+  transform-origin: bottom; }
+
+nav.left a {
+  padding: 1.5em 2em 1em 1em;
+  float: left; }
+
+nav.left a::before {
+  transform-origin: bottom left; }
+
+nav a.selected {
+  z-index: 2; }
+
+nav a.selected::before {
+  margin-bottom: -1px;
+  border-top-width: 1px; }
+
+nav a.selected::before,
+main {
+  background: #eee; }
+
+main {
+  display: block;
+  margin: -8px 0 30px -15px;
+  padding: 1em;
+  border-radius: 3px; }
+
+/*#map {
+  height: 500px;
+  width: 100%;
+}*/
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+#point-list {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50%;
+  background-color: tomato;
+  z-index: -1; }
+
+#map {
+  height: 500px;
+  width: 50%; }
+
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300; }
+
+#infowindow-content .title {
+  font-weight: bold; }
+
+#infowindow-content {
+  display: none; }
+
+#map #infowindow-content {
+  display: inline; }
+
+.pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto; }
+
+#pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px; }
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px; }
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300; }
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 50%; }
+
+#pac-input:focus {
+  border-color: #4d90fe; }
+
+#title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px; }
+
+#target {
+  width: 345px; }
+
+/*# sourceMappingURL=map.css.map */
