@@ -7,11 +7,14 @@
     <!-- <script type="text/javascript" src="../routes/maps.js"></script> -->
     <script type="text/javascript" src="/scripts/maps_id.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQKTN_0e8RdueqYXuKZK99uNFndl6TN6k&libraries=places"></script>
+    <link rel="stylesheet" href="/vendor/nav.css" type="text/css"/>
+
+    <% include ./partials/_header %>
   </head>
 
   <body>
     <h1 id="map-title">MAP ID: <%=map_id%></h1>
-    <div id="info"></div>
+    <h2 id="map-edit">CLICK TO EDIT</h2>
     <input id="pac-input" class="controls" type="text" placeholder="Search new region to refocus map boundary!">
     <div id="map"></div>
     <div id="point-list">LIST OF POINTS HERE</div>

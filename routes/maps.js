@@ -23,13 +23,8 @@ module.exports = (knex) => {
 
   //Load map
   router.get("/:id", (req, res) => {
-    // Carlo Ferrer debugging:
-    console.log('\n***INSIDE LOAD MAP ROUTE***\n')
-    console.log('\n***req.params.id = '+req.params.id+'***\n')
     knex
     .select("*")
-    // Carlo Ferrer Edit:
-    // Fixed .from("maps_index") to read .from("map_index")
     .from("map_index")
     .where({
       id: req.params.id

@@ -1,0 +1,140 @@
+[33mcommit cd5a74f2a13f219a0833731b5f9d6b19f7465f0f[m
+Author: Ali Abji <aliabji@gmail.com>
+Date:   Fri Sep 29 01:47:30 2017 +0000
+
+    user auth completed, still need to verify if reg credentials exist in db already
+
+[1mdiff --git a/server.js b/server.js[m
+[1mindex c89c850..0d2118c 100644[m
+[1m--- a/server.js[m
+[1m+++ b/server.js[m
+[36m@@ -47,7 +47,8 @@[m [mapp.use(express.static("public"));[m
+ [m
+ // Home[m
+ app.get("/", (req, res) => {[m
+[31m-  res.render("splash")[m
+[32m+[m[32m  let userVerification = {user_id: req.session.id}[m
+[32m+[m[32m  res.render("splash", userVerification)[m
+ });[m
+ [m
+ // Mount all map resource routes[m
+[36m@@ -55,31 +56,37 @@[m [mapp.use("/api/maps", mapRoutes(knex));[m
+ [m
+ //map index[m
+ app.get("/maps", (req, res) => {[m
+[31m-  res.render("map_list")[m
+[32m+[m[32m  let userVerification = {user_id: req.session.id}[m
+[32m+[m[32m  res.render("map_list", userVerification)[m
+ });[m
+ [m
+ //map display[m
+ app.get("/maps/:id", (req, res) => {[m
+[31m-  res.render("maps")[m
+[32m+[m[32m  let userVerification = {user_id: req.session.id}[m
+[32m+[m[32m  res.render("maps", userVerification)[m
+ });[m
+ [m
+ //create map[m
+ app.post("/maps/create", (req, res) => {[m
+[31m-  res.render("maps")[m
+[32m+[m[32m  let userVerification = {user_id: req.session.id}[m
+[32m+[m[32m  res.render("maps", userVerification)[m
+ })[m
+ [m
+ //map edit[m
+ app.put("/maps/edit", (req, res) => {[m
+[31m-  res.render("maps")[m
+[32m+[m[32m  let userVerification = {user_id: req.session.id}[m
+[32m+[m[32m  res.render("maps", userVerification)[m
+ });[m
+ [m
+ app.use("/api/users", mapRoutes(knex));[m
+ [m
+ //user routes[m
+ app.get("/users/login", (req, res) => {[m
+[31m-  res.render("login")[m
+[32m+[m[32m  let userVerification = {user_id: req.session.id}[m
+[32m+[m[32m  res.render("login", userVerification)[m
+ });[m
+ [m
+[32m+[m[32m//register new user[m
+ app.post("/register", (req, res) => {[m
+   [m
+   if (!req.body.reg_username || !req.body.reg_password) {[m
+[36m@@ -90,48 +97,62 @@[m [mapp.post("/register", (req, res) => {[m
+   let hashed = req.body.reg_password;[m
+   let hashedPassword = bcrypt.hashSync(hashed, 10);[m
+ [m
+[31m-  knex("users").where("username", "!=", req.body.reg_username)[m
+[32m+[m[32m  knex("users").insert([m
+[32m+[m[32m    knex.select()[m
+[32m+[m[32m  )[m
+[32m+[m[32m  knex("users").where("username", req.body.reg_username)[m
+   .insert({[m
+     username: req.body.reg_username,[m
+     password: hashedPassword[m
+   })[m
+   .returning("id")[m
+[31m-[m
+[31m-  .then(() => {[m
+[32m+[m[32m  .then((id) => {[m
+     req.session.id = id[m
+[31m-    res.redirect("maps")[m
+[32m+[m[32m    res.redirect("/")[m
+   })[m
+   .catch((err) => {[m
+[31m-    res.statusCode(400).send("Error, please go back and try again")[m
+[32m+[m[32m    console.error(err)[m
+[32m+[m[32m    // res.statusCode(400).send("Error, please go back and try again")[m
+   })[m
+ });[m
+ [m
+[32m+[m
+[32m+[m[32m//login page[m
+ app.post("/login", (req, res) => {[m
+   let userPass = req.body.password[m
+[31m-  knex[m
+[32m+[m[32m  console.log("hello")[m
+[32m+[m[32m  return knex[m
+   .select("*")[m
+   .from("users")[m
+[31m-  .where("username", "===", req.body.username)[m
+[32m+[m[32m  .where("username", req.body.username)[m
+   .then((userRow) => {[m
+[31m-    if (bcrypt.compareSync(userPass, password)) {[m
+[31m-      req.session.id = userRow.id[m
+[31m-      res.redirect("maps")[m
+[32m+[m[32m    console.log(userRow[0].password)[m
+[32m+[m[32m    if (bcrypt.compareSync(userPass, userRow[0].password)) {[m
+[32m+[m[32m      console.log(userRow)[m
+[32m+[m[32m      req.session.id = userRow[0].id[m
+[32m+[m[32m      let userVerification = {user_id: req.session.id}[m
+[32m+[m[32m      res.redirect("/")[m
+     }[m
+   })[m
+[31m-  res.statusCode(400).send("Error, please try again")[m
+[32m+[m[32m  .catch((err) => {[m
+[32m+[m[32m    res.status(500).send("Error, please try again" + err)[m
+[32m+[m[41m    [m
+[32m+[m[32m  })[m
+ })[m
+ [m
+[32m+[m[32m//logout, clear cookies[m
+ app.post("/logout", (req, res) => {[m
+   res.clearCookie("id")[m
+   delete req.session.id[m
+   res.redirect("/")[m
+ })[m
+ [m
+[32m+[m[32m//user profile page[m
+ app.get("/users/:id", (req, res) => {[m
+[31m-  [m
+[31m-  res.render("profile")[m
+[32m+[m[32m  let userVerification = {user_id: req.session.id}[m
+[32m+[m[32m  res.render("profile", userVerification)[m
+ })[m
+ [m
+ app.listen(PORT, () => {[m
+   console.log("Example app listening on port " + PORT);[m
+[31m-});[m
+[32m+[m[32m})[m
