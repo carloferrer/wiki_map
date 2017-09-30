@@ -4,4 +4,5 @@ node_modules/
 *.sqlite3
 .jshintrc
 /**/.DS_Store
-.sass-cache
+*.scssc
+/public/styles/.sass-cache/
