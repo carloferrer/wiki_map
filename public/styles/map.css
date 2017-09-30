@@ -86,8 +86,6 @@ nav a::before {
   transform: perspective(5px) rotateX(2deg);
   transform-origin: bottom; }
 
-
-
 nav.left a {
   padding: 1.5em 2em 1em 1em;
   float: left; }
@@ -112,24 +110,92 @@ main {
   padding: 1em;
   border-radius: 3px; }
 
-.form {
+/*#map {
+  height: 500px;
+  width: 100%;
+}*/
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+#point-list {
   position: absolute;
-  top: 10em;
-  left: 19em; }
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50%;
+  background-color: tomato;
+  z-index: -1; }
 
-.register {
-  padding: 1em; }
+#map {
+  height: 500px;
+  width: 50%; }
 
-.login {
-  padding: 1em; }
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
 
-.paper {
-  display: flex;
-  justify-content: center;
-  align-items: center; }
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300; }
 
-<<<<<<< HEAD
+#infowindow-content .title {
+  font-weight: bold; }
 
-=======
->>>>>>> 4d6918f175ab131cc8ca84a9d4f79f8d5bff25be
-/*# sourceMappingURL=splash.css.map */
+#infowindow-content {
+  display: none; }
+
+#map #infowindow-content {
+  display: inline; }
+
+.pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto; }
+
+#pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px; }
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px; }
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300; }
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 50%; }
+
+#pac-input:focus {
+  border-color: #4d90fe; }
+
+#title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px; }
+
+#target {
+  width: 345px; }
+
+/*# sourceMappingURL=map.css.map */

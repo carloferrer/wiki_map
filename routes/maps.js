@@ -34,6 +34,22 @@ module.exports = (knex) => {
     })
   })
 
+    //Load users created and contributed maps
+    router.get("/users/:id", (req, res) => {
+      knex
+      .select("*")
+      .from("map_index")
+      .where({
+        creator_id: req.params.id
+      })
+      .then((results) => {
+        res.json(results)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+    })
+
   //Load map points
   router.get("/:id/points", (req, res) => {
     knex

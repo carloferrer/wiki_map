@@ -2,5 +2,7 @@ node_modules/
 .env
 *.log
 *.sqlite3
-.jshintrc 
+.jshintrc
 /**/.DS_Store
+*.scssc
+/public/styles/.sass-cache/1c7462860a50c527aa9f7b07b2ff9570008020df/
