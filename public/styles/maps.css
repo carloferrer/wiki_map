@@ -12,11 +12,12 @@ html {
 
 #point-list {
   position: absolute;
-  top: 101.1px;
+  top: 0;
   right: 0;
-  height: 500px;
+  height: 100%;
   width: 50%;
   background-color: tomato;
+  z-index: -1;
 }
 
 #map {

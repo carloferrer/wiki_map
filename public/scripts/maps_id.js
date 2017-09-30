@@ -2,6 +2,11 @@ $(document).ready(function() {
 
   loadMap();
 
+
+  var editMode = false;
+  var infowindow;
+  var map;
+
   function loadMap() {
     $.get('http://localhost:8080/api'+window.location.pathname)
     .done(function(map) {
@@ -19,12 +24,27 @@ $(document).ready(function() {
     });
   }
 
+  function editMapMode( ) {
+    $('#map-edit').on('click', function() {
+      if (!editMode) {
+        editMode = true;
+        console.log('IN EDIT MODE!');
+
+      } else {
+        editMode = false;
+        console.log('LEFT EDIT MODE! NO LONGER EDITING!');
+      }
+    });
+  }
+
   function reloadDetails(map) {
     $('#map-title').text('Map: '+map.title);
   }
 
   function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
+    infowindow = new google.maps.InfoWindow();
+
+    map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: -33.8688, lng: 151.2195},
       zoom: 13,
       mapTypeId: 'roadmap'
@@ -32,10 +52,45 @@ $(document).ready(function() {
 
     geolocate(map, navigator.geolocation);
     searchPlace(map);
+    // addPoints(google.maps);
+
+    editMapMode();
+
+      google.maps.event.addListener(map, 'click', function(event) {
+        if(editMode) {
+          placeMarker(event.latLng);
+          console.log('LAT LNG: ',event.latLng.lat(),event.latLng.lng());
+        }
+      });
+  }
+
+  // function addPoints(map) {
+  //   // if (editMode) {
+  //     map.event.addListener(map, 'click', function(event) {
+  //       placeMarker(event.latLng);
+  //       console.log(editMode);
+  //       console.log('PLACE MARKER ATTEMPT');
+  //     });
+  //   // }
+  // }
+
+  function placeMarker(location) {
+
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        title: location.name,
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.setContent('Coordinates of point:\n'+(location.lat()).toString()+'\n'+(location.lng()).toString());
+      infowindow.open(map, this);
+      console.log('Point located here: ', location.lat(), location.lng());
+    });
   }
 
   function geolocate(map, geolocation) {
-    var infoWindow = new google.maps.InfoWindow;
+    infoWindow = new google.maps.InfoWindow;
 
     if (geolocation) {
       geolocation.getCurrentPosition(function(position) {
@@ -99,18 +154,18 @@ $(document).ready(function() {
           console.log("Returned place contains no geometry");
           return;
         }
-        var icon = {
-          url: place.icon,
-          size: new google.maps.Size(71, 71),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(25, 25)
-        };
+        // var icon = {
+        //   url: place.icon,
+        //   size: new google.maps.Size(71, 71),
+        //   origin: new google.maps.Point(0, 0),
+        //   anchor: new google.maps.Point(17, 34),
+        //   scaledSize: new google.maps.Size(25, 25)
+        // };
 
         // Create a marker for each place.
         var newMark = new google.maps.Marker({
           map: map,
-          icon: icon,
+          // icon: icon,
           title: place.name,
           position: place.geometry.location
         });
