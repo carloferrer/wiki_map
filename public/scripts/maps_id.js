@@ -71,6 +71,7 @@ $(document).ready(function() {
         });
         markers[markerId] = marker; // cache marker in markers object
         bindMarkerEvents(marker); // bind right click event to marker
+        $('.edit-coords').text(lat+'_'+lng);
         editMode = false;
       }
     });
