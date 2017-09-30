@@ -115,7 +115,10 @@ main {
   width: 100%;
 }*/
 html {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
 *, *:before, *:after {
   box-sizing: inherit; }
@@ -125,7 +128,7 @@ html {
   top: 11.5;
   right: 11.5;
   height: 65%;
-  width: 70%;
+  width: 30%;
   background-color: tomato;
   z-index: 1000; }
 

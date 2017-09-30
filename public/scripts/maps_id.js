@@ -1,44 +1,48 @@
 $(document).ready(function() {
 
+  var path = window.location.pathname;
+
   loadMap();
 
-
   var editMode = false;
-  var infowindow;
-  var map;
+  var map, infowindow;
+  // var markerID = [];
+  var markers = {};
 
   function loadMap() {
-    $.get('http://localhost:8080/api'+window.location.pathname)
-    .done(function(map) {
+    if (path != '/maps/create') {
+      console.log(path);
+      $.get('http://localhost:8080/api'+path)
+      .done(function(map) {
 
+        initMap();
 
+        console.log(map);
+        $('#map-title').text('Map: '+map.title);
 
-      initMap();
-
-      console.log(map);
-      reloadDetails(map);
-
-    })
-    .fail(function(error) {
-      console.error(error);
-    });
+      })
+      .fail(function(error) {
+        console.error(error);
+      });
+    } else {
+      $('#map-title').text('CREATE NEW MAP');
+        initMap();
+    }
   }
 
   function editMapMode( ) {
     $('#map-edit').on('click', function() {
       if (!editMode) {
         editMode = true;
+        $('#map-edit').text('NOW CLICK MAP TO ADD MARKER');
         console.log('IN EDIT MODE!');
 
       } else {
         editMode = false;
         console.log('LEFT EDIT MODE! NO LONGER EDITING!');
+        $('#map-edit').text('CLICK HERE TO ADD MARKER');
       }
     });
-  }
-
-  function reloadDetails(map) {
-    $('#map-title').text('Map: '+map.title);
   }
 
   function initMap() {
@@ -52,42 +56,51 @@ $(document).ready(function() {
 
     geolocate(map, navigator.geolocation);
     searchPlace(map);
-    // addPoints(google.maps);
 
     editMapMode();
 
-      google.maps.event.addListener(map, 'click', function(event) {
-        if(editMode) {
-          placeMarker(event.latLng);
-          console.log('LAT LNG: ',event.latLng.lat(),event.latLng.lng());
-        }
+
+    // All of the below borrowed from http://jsfiddle.net/fatihacet/CKegk/
+    var addMarker = google.maps.event.addListener(map, 'click', function(e) {
+      var lat = e.latLng.lat(); // lat of clicked point
+      var lng = e.latLng.lng(); // lng of clicked point
+      var markerId = getMarkerUniqueId(lat, lng); // an that will be used to cache this marker in markers object.
+      if(editMode) {
+        var marker = new google.maps.Marker({
+            position: getLatLng(lat, lng),
+            map: map,
+            id: 'marker_' + markerId
+        });
+        markers[markerId] = marker; // cache marker in markers object
+        bindMarkerEvents(marker); // bind right click event to marker
+        $('.edit-coord-x').text('Latitude: '+lat);
+        $('.edit-coord-y').text('Longitude: '+lng);
+        editMode = false;
+        $('#map-edit').text('CLICK HERE TO ADD MARKER');
+      }
+    });
+    var getMarkerUniqueId = function(lat, lng) {
+        return lat + '_' + lng;
+    };
+
+    var getLatLng = function(lat, lng) {
+      return new google.maps.LatLng(lat, lng);
+    };
+
+    var bindMarkerEvents = function(marker) {
+      google.maps.event.addListener(marker, "rightclick", function (point) {
+          var markerId = getMarkerUniqueId(point.latLng.lat(), point.latLng.lng()); // get marker id by using clicked point's coordinate
+          var marker = markers[markerId]; // find marker
+          removeMarker(marker, markerId); // remove it
       });
+    };
+
+    var removeMarker = function(marker, markerId) {
+      marker.setMap(null); // set markers setMap to null to remove it from map
+      delete markers[markerId]; // delete marker instance from markers object
+    };
   }
 
-  // function addPoints(map) {
-  //   // if (editMode) {
-  //     map.event.addListener(map, 'click', function(event) {
-  //       placeMarker(event.latLng);
-  //       console.log(editMode);
-  //       console.log('PLACE MARKER ATTEMPT');
-  //     });
-  //   // }
-  // }
-
-  function placeMarker(location) {
-
-    var marker = new google.maps.Marker({
-        position: location,
-        map: map,
-        title: location.name,
-    });
-
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent('Coordinates of point:\n'+(location.lat()).toString()+'\n'+(location.lng()).toString());
-      infowindow.open(map, this);
-      console.log('Point located here: ', location.lat(), location.lng());
-    });
-  }
 
   function geolocate(map, geolocation) {
     infoWindow = new google.maps.InfoWindow;
@@ -130,7 +143,7 @@ $(document).ready(function() {
       searchBox.setBounds(map.getBounds());
     });
 
-    var markers = [];
+    markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
 
@@ -163,18 +176,19 @@ $(document).ready(function() {
         // };
 
         // Create a marker for each place.
-        var newMark = new google.maps.Marker({
+        var marker = new google.maps.Marker({
           map: map,
           // icon: icon,
           title: place.name,
-          position: place.geometry.location
+          position: place.geometry.location,
+          animation: google.maps.Animation.DROP
         });
 
-        google.maps.event.addListener(newMark,'click',function(){
+        google.maps.event.addListener(marker,'click',function(){
           console.log(place.geometry.location.lat()+' '+place.geometry.location.lng());
         });
 
-        markers.push(newMark);
+        markers.push(marker);
 
 
         if (place.geometry.viewport) {
@@ -193,3 +207,55 @@ $(document).ready(function() {
 });
 
 
+  // function addPoints(map) {
+  //   // if (editMode) {
+  //     map.event.addListener(map, 'click', function(event) {
+  //       placeMarker(event.latLng);
+  //       console.log(editMode);
+  //       console.log('PLACE MARKER ATTEMPT');
+  //     });
+  //   // }
+  // }
+
+  //https://stackoverflow.com/questions/8521766/google-maps-api-3-remove-selected-marker-only
+
+  // function placeMarker(location) {
+
+  //   var marker = new google.maps.Marker({
+  //       position: location,
+  //       map: map,
+  //       title: location.name,
+  //       animation: google.maps.Animation.DROP
+  //   });
+
+  //   map.panTo(location);
+
+  //   console.log('MARKER ID ARRAY BEFORE:'+markerID.length);
+  //   console.log('MARKERS OBJECT LENGTH BEFORE:'+Object.keys(markers).length);
+
+  //   markerID.push(marker.__gm_id);
+  //   markers[markerID[markerID.length-1]] = marker;
+
+  //   console.log('MARKER ID ARRAY AFTER:'+markerID.length);
+  //   console.log('MARKERS OBJECT LENGTH AFTER:'+Object.keys(markers).length);
+
+  //   google.maps.event.addListener(marker, "rightclick", function () {
+  //     delMarker(this.__gm_id);
+  //     markerID.splice(markerID.indexOf(markerID.length));
+  //     console.log('MARKER ID ARRAY AFTER DELETE:'+markerID.length);
+  //     console.log('MARKERS OBJECT LENGTH AFTER DELETE:'+Object.keys(markers).length);
+  //   });
+
+  //   google.maps.event.addListener(marker, 'click', function() {
+  //     infowindow.setContent('Coordinates of point:\n'+(location.lat()).toString()+'\n'+(location.lng()).toString());
+  //     infowindow.open(map, this);
+  //     console.log('Point located here: ', location.lat(), location.lng());
+  //   });
+
+  //   function delMarker(markerID) {
+  //     marker = markers[markerID];
+  //     marker.setMap(null);
+  //   }
+
+  //   editMode = false;
+  // }
