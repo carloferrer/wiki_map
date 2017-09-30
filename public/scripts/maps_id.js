@@ -85,16 +85,21 @@ $(document).ready(function() {
     });
 
     map.panTo(Gpoint);
+
     console.log('MARKER ID ARRAY BEFORE:'+markerID.length);
+    console.log('MARKERS OBJECT LENGTH BEFORE:'+Object.keys(markers).length);
+
     markerID.push(marker.__gm_id);
+    markers[markerID[markerID.length-1]] = marker;
+
     console.log('MARKER ID ARRAY AFTER:'+markerID.length);
-    markers[markerID.length-1] = marker;
-    console.log('MARKERS** ARRAY AFTER:'+markers.length);
+    console.log('MARKERS OBJECT LENGTH AFTER:'+Object.keys(markers).length);
 
     google.maps.event.addListener(marker, "rightclick", function () {
-      delMarker(markerID[marker.length-1]);
-      markerID.splice(markerID.indexOf(marker.length));
+      delMarker(markerID[markerID.length-1]);
+      markerID.splice(markerID.indexOf(markerID.length));
       console.log('MARKER ID ARRAY AFTER DELETE:'+markerID.length);
+      console.log('MARKERS OBJECT LENGTH AFTER DELETE:'+Object.keys(markers).length);
     });
 
     google.maps.event.addListener(marker, 'click', function() {
