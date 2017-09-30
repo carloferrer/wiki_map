@@ -1,6 +1,8 @@
 //variables
 $active-tab: #FFEBCD;
 $inactive-tab: #F5CE94;
+$logo-red: #FF0000;
+$logo-orange: #FF6800;
 
 #nav-bar {
   // background-color: #337512;
@@ -17,8 +19,9 @@ $inactive-tab: #F5CE94;
   float: left;
 }
 
-#nav-bar h3 {
-  color: black;
+#nav-bar h1 {
+  color: $logo-orange;
+  text-shadow: -1px 0 $logo-red, 0 1px $logo-red, 1px 0 $logo-red, 0 -1px $logo-red;
   text-align: center;
   float: left;
 }
