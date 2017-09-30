@@ -4,7 +4,7 @@ $(document).ready(function() {
 
   var editMode = false;
   var map, infowindow;
-  var markerID = [];
+  // var markerID = [];
   var markers = {};
 
   function loadMap() {
@@ -55,15 +55,48 @@ $(document).ready(function() {
     editMapMode();
     // addMarker();
 
-      google.maps.event.addListener(map, 'click', function(event) {
-        if(editMode) {
-          placeMarker(event.latLng);
-          console.log('LAT LNG: ',event.latLng.lat(),event.latLng.lng());
-        }
+      // google.maps.event.addListener(map, 'click', function(event) {
+      //   if(editMode) {
+      //     placeMarker(event.latLng);
+      //     console.log('LAT LNG: ',event.latLng.lat(),event.latLng.lng());
+      //   }
+      // });
+
+    // All of the below borrowed from http://jsfiddle.net/fatihacet/CKegk/
+    var addMarker = google.maps.event.addListener(map, 'click', function(e) {
+      var lat = e.latLng.lat(); // lat of clicked point
+      var lng = e.latLng.lng(); // lng of clicked point
+      var markerId = getMarkerUniqueId(lat, lng); // an that will be used to cache this marker in markers object.
+      var marker = new google.maps.Marker({
+          position: getLatLng(lat, lng),
+          map: map,
+          id: 'marker_' + markerId
       });
+      markers[markerId] = marker; // cache marker in markers object
+      bindMarkerEvents(marker); // bind right click event to marker
+    });
+
+    var getMarkerUniqueId = function(lat, lng) {
+        return lat + '_' + lng;
+    };
+
+    var getLatLng = function(lat, lng) {
+      return new google.maps.LatLng(lat, lng);
+    };
+
+    var bindMarkerEvents = function(marker) {
+      google.maps.event.addListener(marker, "rightclick", function (point) {
+          var markerId = getMarkerUniqueId(point.latLng.lat(), point.latLng.lng()); // get marker id by using clicked point's coordinate
+          var marker = markers[markerId]; // find marker
+          removeMarker(marker, markerId); // remove it
+      });
+    };
+
+    var removeMarker = function(marker, markerId) {
+      marker.setMap(null); // set markers setMap to null to remove it from map
+      delete markers[markerId]; // delete marker instance from markers object
+    };
   }
-
-
 
 
   function geolocate(map, geolocation) {
