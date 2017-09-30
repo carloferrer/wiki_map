@@ -18,29 +18,39 @@ $(document).ready(function() {
   }
 
   function createNewMap() {
-    var newMapNum = 'NEW MAP; INDEX#:';
 
-    $('#create-new-map').on('click', function() {
+    // console.log("createNewMap loaded.");
+  //   // var newMapNum = 'NEW MAP; INDEX#:';
 
-      $.get('http://localhost:8080/api/maps')
-      .done(function(maps) {
-        newMapNum += maps.length;
-        console.log(newMapNum);
-
-      })
-      .fail(function(error) {
-        console.error(error);
-      });
-
-      $.post('http://localhost:8080/api/maps/create')
-      .done(function() {
-
-      })
-      .fail(function(error) {
-        console.error(error);
-      });
-
+    $('#new-map').on('submit', function(event) {
+      event.preventDefault();
+      console.log('CLICKING SUBMIT.');
+      var newTitle = $('textarea').serialize();
+      console.log(newTitle);
     });
+
+
+
+  //   //   $.get('http://localhost:8080/api/maps')
+  //   //   .done(function(maps) {
+  //   //     newMapNum += maps.length;
+  //   //     console.log(newMapNum);
+
+  //   //   })
+  //   //   .fail(function(error) {
+  //   //     console.error(error);
+  //   //   });
+
+  //   //   $.post('http://localhost:8080/api/maps/create')
+  //   //   .done(function() {
+
+  //   //   })
+  //   //   .fail(function(error) {
+  //   //     console.error(error);
+  //   //   });
+
+  //   // });
+  //   }
   }
 
 
