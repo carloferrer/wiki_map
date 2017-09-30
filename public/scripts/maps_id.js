@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  var path = window.location.pathname;
+
   loadMap();
 
   var editMode = false;
@@ -8,18 +10,23 @@ $(document).ready(function() {
   var markers = {};
 
   function loadMap() {
-    $.get('http://localhost:8080/api'+window.location.pathname)
-    .done(function(map) {
+    if (path != '/maps/create') {
+      console.log(path);
+      $.get('http://localhost:8080/api'+path)
+      .done(function(map) {
 
-      initMap();
+        initMap();
 
-      console.log(map);
-      reloadDetails(map);
+        console.log(map);
+        $('#map-title').text('Map: '+map.title);
 
-    })
-    .fail(function(error) {
-      console.error(error);
-    });
+      })
+      .fail(function(error) {
+        console.error(error);
+      });
+    } else {
+      $('#map-title').text('CREATE NEW MAP');
+    }
   }
 
   function editMapMode( ) {
@@ -33,10 +40,6 @@ $(document).ready(function() {
         console.log('LEFT EDIT MODE! NO LONGER EDITING!');
       }
     });
-  }
-
-  function reloadDetails(map) {
-    $('#map-title').text('Map: '+map.title);
   }
 
   function initMap() {
