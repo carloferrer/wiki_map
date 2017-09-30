@@ -15,10 +15,22 @@ html {
   overflow:hidden;
 }
 
+.point-pic {
+  width: 2em;
+  height: 2em;
+}
+
+.edit-desc, .edit-title {
+  width:100%;
+}
+
 #point-info {
   float: right;
   width:30%;
+  height:500px;
   right: 0;
+  border: solid gray;
+  border-radius: 3px;
 }
 
 #map {

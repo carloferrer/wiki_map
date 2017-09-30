@@ -7,9 +7,6 @@ module.exports = (knex) => {
 
   //Load map index
   router.get("", (req, res) => {
-    // Carlo Ferre debugging:
-    console.log('\n***INSIDE LOAD MAP INDEX ROUTE***\n')
-
     knex
     .select("*")
     .from("map_index")
@@ -61,11 +58,24 @@ module.exports = (knex) => {
 
   //create new map
   router.post("/create", (req, res) => {
-    knex("map_index")
-    .insert({
-      title: req.body.map_title,
-      creator_id: req.session.id
+
+
+    if (!req.body.map_title) {
+      res.status(400);
+      console.log('error: invalid request: no data in POST body');
+      return;
+    }
+
+    console.log(req.body.map_title, req.session.id);
+
+    return knex("map_index")
+    .insert(
+    { title: req.body.map_title, creator_id: req.session.id }
+    , 'id')
+    .catch((err) => {
+      console.error(err)
     })
+
   })
 
   //add point to map

@@ -63,13 +63,13 @@ app.get("/maps", (req, res) => {
 // Carlo Ferrer Edit:
 // Changed from app.post to app.get b/c need to load map creation page - submission of map creation, i.e., .post, is handled by maps.js under router.post('/create') etc.
 // load map creation page
-app.get("/maps/create", (req, res) => {
-  let userAndMap = {
-    user_id: req.session.id,
-    map_id: 'CREATE'
-  }
-  res.render("maps", userAndMap)
-});
+// app.get("/maps/create", (req, res) => {
+//   let userAndMap = {
+//     user_id: req.session.id,
+//     map_id: 'CREATE'
+//   }
+//   res.render("maps", userAndMap)
+// });
 
 //map display
 app.get("/maps/:id", (req, res) => {
@@ -135,6 +135,8 @@ app.post("/register", (req, res) => {
 //login page
 app.post("/login", (req, res) => {
   let userPass = req.body.password
+  // Carlo debuggin:
+  console.log('userPass:'+userPass);
   return knex
   .select("*")
   .from("users")

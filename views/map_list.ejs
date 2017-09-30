@@ -12,8 +12,14 @@
   </head>
 
   <body>
-    <h1>Here's a list of maps...</h1>
-    <a href="/maps/create"><h2>CLICK THIS TO CREATE MAP</h2></a>
+    <form id="new-map">
+      <h2>New map creation...</h2>
+      <textarea name='map_title' placeholder="Enter title for new map here!"></textarea>
+      <br>
+      <input type='submit' value='Generate new map!'>
+    </form>
+    <br><br>
+    <h2>List of existing maps...</h2>
     <div id="map-list"></div>
   </body>
 
