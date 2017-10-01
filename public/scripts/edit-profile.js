@@ -1,9 +1,9 @@
 $(function () {
-  $("#chkPassport").click(function () {
+  $("#chk-box").click(function () {
       if ($(this).is(":checked")) {
-          $("#dvPassport").show();
+          $("#edit-form").show();
       } else {
-          $("#dvPassport").hide();
+          $("#edit-form").hide();
       }
   });
 });

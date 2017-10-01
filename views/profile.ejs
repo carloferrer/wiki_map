@@ -14,21 +14,36 @@
 </head>
 <body>
 
+  <label for="chk-box">
+    <input type="checkbox" id="chk-box" />
+      Click here to edit your username and about me section
+    </label>
+    <hr />
+    <form action="" method="POST" id="edit-form" style="display: none">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="name" name="user_name">
+      </div>
+      <br>
+      <div>
+          <label for="msg">Message:</label>
+          <textarea id="aboutme" name="user_me"></textarea>
+      </div>
+    </form>
+
+    <!-- </form>
+    <div id="edit-username" style="display: none">
+        New Username:
+        <input type="text" id="username-input" />
+        <div id="edit-username" style="display: none">
+            About me:
+            <input type="text" id="username-input" />
+    </div>
+    </div>> -->
 
 <div style="margin-top: 130px" id="about-me">  
 <div id="about-me">
 </div>
-
-<label for="chkPassport">
-    <input type="checkbox" id="chkPassport" />
-    Do you have Passport?
-</label>
-<hr />
-<div id="dvPassport" style="display: none">
-    Passport Number:
-    <input type="text" id="txtPassportNumber" />
-</div>
-
 <div id="map-list">
   <h1>Maps I've Contributed To!</h1>
   
