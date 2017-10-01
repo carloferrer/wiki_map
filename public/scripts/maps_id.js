@@ -39,11 +39,11 @@ $(document).ready(function() {
     $('#map-edit').on('click', function() {
       if (!editMode) {
         editMode = true;
-        $('#map-edit').text('NOW CLICK MAP TO ADD MARKER');
+        $('#map-edit').text('**NOW CLICK MAP TO ADD MARKER**');
 
       } else {
         editMode = false;
-        $('#map-edit').text('CLICK HERE TO ADD MARKER');
+        $('#map-edit').text('**CLICK HERE TO ADD MARKER**');
       }
     });
   }
@@ -79,7 +79,7 @@ $(document).ready(function() {
         $('.edit-coord-x').text('Latitude: '+lat);
         $('.edit-coord-y').text('Longitude: '+lng);
         editMode = false;
-        $('#map-edit').text('CLICK HERE TO ADD MARKER');
+        $('#map-edit').text('**CLICK HERE TO ADD MARKER**');
       }
     });
     var getMarkerUniqueId = function(lat, lng) {

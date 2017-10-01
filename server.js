@@ -135,8 +135,6 @@ app.post("/register", (req, res) => {
 //login page
 app.post("/login", (req, res) => {
   let userPass = req.body.password
-  // Carlo debuggin:
-  console.log('userPass:'+userPass);
   return knex
   .select("*")
   .from("users")

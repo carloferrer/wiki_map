@@ -82,11 +82,11 @@ module.exports = (knex) => {
       return;
     }
 
-    console.log(req.body.map_title, req.session.id);
+    console.log(req.body.map_title, req.session.id[0]);
 
-    return knex("map_index")
+    knex("map_index")
     .insert(
-    { title: req.body.map_title, creator_id: req.session.id }
+    { title: req.body.map_title, creator_id: req.session.id[0] }
     , 'id')
     .catch((err) => {
       console.error(err)
