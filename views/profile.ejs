@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="/vendor/nav.css" type="text/css"/>
   <script type="text/javascript" src="/scripts/profile.js"></script>
   <script type="text/javascript" src="/scripts/logout.js"></script>
-  <title>Document</title>
+  <script type="text/javascript" src="/scripts/edit-profile.js"></script>
+  <title>Map Adventure</title>
   <% include ./partials/_header %>
 </head>
 <body>
@@ -16,6 +17,16 @@
 
 <div style="margin-top: 130px" id="about-me">  
 <div id="about-me">
+</div>
+
+<label for="chkPassport">
+    <input type="checkbox" id="chkPassport" />
+    Do you have Passport?
+</label>
+<hr />
+<div id="dvPassport" style="display: none">
+    Passport Number:
+    <input type="text" id="txtPassportNumber" />
 </div>
 
 <div id="map-list">

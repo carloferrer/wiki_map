@@ -4,5 +4,3 @@ $(document).ready(function() {
     $(this).addClass('selected');
   });
 })
-
-// $('#about').addClass('expand')
