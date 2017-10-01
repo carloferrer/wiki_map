@@ -98,6 +98,9 @@ module.exports = (knex) => {
   router.post("/:id/points/new", (req, res) => {
     // Carlo debuggin...
     console.log("THIS BE THE REQBODYPOINTTITLE:",req.body.point_title);
+    console.log("THIS BE THE REQBODYDESC:",req.body.point_desc);
+    console.log("THIS BE THE LATITUDE:",req.body.x);
+    console.log("THIS BE THE LONGITUDE:",req.body.y);
     knex("map_points").where("map_index_id", "=", req.params.id)
     .insert({
       point_title: req.body.point_title,
@@ -108,11 +111,12 @@ module.exports = (knex) => {
       point_description: req.body.point_desc
       // Carlo Debugging: commented out the following since don't have pic to test w/
       // point_pic: req.body.pic
-    })
-    .then(() => {
-      res.statusCode(200).send()
-    })
+    }, 'id')
+    // .then(() => {
+    //   res.statusCode(200).send()
+    // })
     .catch((err) => {
+      console.log('HERE BE AN ERROR')
       console.error(err)
     })
   })

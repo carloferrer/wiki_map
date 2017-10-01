@@ -34,8 +34,8 @@ $(document).ready(function() {
     }
   }
 
-  function createNewPoint(title, desc, lat, lng) {
-    $.post('http://localhost:8080/api'+path+'/points/new', title, desc, lat, lng)
+  function createNewPoint(all) {
+    $.post('http://localhost:8080/api'+path+'/points/new', all)
     .done(function(){})
     .fail(function(error) {
       console.error(error);
@@ -46,15 +46,20 @@ $(document).ready(function() {
     $('#point-info').on('submit', function(event) {
       event.preventDefault();
 
-      var temp_title = $('.edit-title').serialize();
-      var temp_desc = $('.edit-desc').serialize();
-      var temp_lat = $('.edit-coord-x').serialize();
-      var temp_lng = $('.edit-coord-y').serialize();
+      // var temp_title = $('.edit-title').serialize();
+      // var temp_desc = $('.edit-desc').serialize();
+      // var temp_lat = $('.edit-coord-x').serialize();
+      // var temp_lng = $('.edit-coord-y').serialize();
 
-      console.log(temp_title, temp_desc);
-      console.log(temp_lat, temp_lng);
+      // console.log(temp_title, temp_desc);
+      // console.log(temp_lat, temp_lng);
 
-      createNewPoint(temp_title, temp_desc, temp_lat, temp_lng);
+      var temp = $('.edit-title,.edit-desc,.edit-coord-x,.edit-coord-y').serialize();
+
+      console.log(temp);
+
+
+      createNewPoint(temp);
     });
   }
 
