@@ -11,8 +11,6 @@ $(document).ready(function() {
 
   var markers = {};
 
-  // var temp_lat, temp_lng;
-
   function loadMap() {
     if (path != '/maps/create') {
       console.log(path);
