@@ -2,13 +2,16 @@ $(document).ready(function() {
 
   var path = window.location.pathname;
 
-
   loadMap();
+  formSubmission();
 
   var editMode = false;
+
   var map, infowindow;
-  // var markerID = [];
+
   var markers = {};
+
+  // var temp_lat, temp_lng;
 
   function loadMap() {
     if (path != '/maps/create') {
@@ -31,19 +34,35 @@ $(document).ready(function() {
     }
   }
 
-  // function savePoint() {
-  //   let
-  // }
+  function createNewPoint() {
+
+  }
+
+  function formSubmission() {
+    $('#point-info').on('submit', function(event) {
+      event.preventDefault();
+
+      var temp_title = $('.edit-title').serialize();
+      var temp_desc = $('.edit-desc').serialize();
+      var temp_lat = $('.edit-coord-x').serialize();
+      var temp_lng = $('.edit-coord-y').serialize();
+
+      console.log(temp_title, temp_desc);
+      console.log(temp_lat, temp_lng);
+
+
+    });
+  }
 
   function editMapMode() {
     $('#map-edit').on('click', function() {
       if (!editMode) {
         editMode = true;
-        $('#map-edit').text('**NOW CLICK MAP TO ADD MARKER**');
+        $('#map-edit').val('NOW CLICK MAP TO ADD MARKER');
 
       } else {
         editMode = false;
-        $('#map-edit').text('**CLICK HERE TO ADD MARKER**');
+        $('#map-edit').val('CLICK HERE TO ADD MARKER');
       }
     });
   }
@@ -76,10 +95,15 @@ $(document).ready(function() {
         });
         markers[markerId] = marker; // cache marker in markers object
         bindMarkerEvents(marker); // bind right click event to marker
-        $('.edit-coord-x').text('Latitude: '+lat);
-        $('.edit-coord-y').text('Longitude: '+lng);
+
+        // store lat and lng for if point is to be saved
+        // temp_lat = lat;
+        // temp_lng = lng;
+
+        $('.edit-coord-x').text(lat);
+        $('.edit-coord-y').text(lng);
         editMode = false;
-        $('#map-edit').text('**CLICK HERE TO ADD MARKER**');
+        $('#map-edit').val('CLICK HERE TO ADD MARKER');
       }
     });
     var getMarkerUniqueId = function(lat, lng) {

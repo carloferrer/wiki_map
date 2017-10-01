@@ -20,7 +20,7 @@ html {
   height: 2em;
 }
 
-.edit-desc, .edit-title {
+.edit-desc, .edit-title, .edit-coord-x, .edit-coord-y {
   width:100%;
 }
 
