@@ -2,6 +2,7 @@ $(document).ready(function() {
 
   var path = window.location.pathname;
 
+
   loadMap();
 
   var editMode = false;
@@ -30,16 +31,18 @@ $(document).ready(function() {
     }
   }
 
-  function editMapMode( ) {
+  // function savePoint() {
+  //   let
+  // }
+
+  function editMapMode() {
     $('#map-edit').on('click', function() {
       if (!editMode) {
         editMode = true;
         $('#map-edit').text('NOW CLICK MAP TO ADD MARKER');
-        console.log('IN EDIT MODE!');
 
       } else {
         editMode = false;
-        console.log('LEFT EDIT MODE! NO LONGER EDITING!');
         $('#map-edit').text('CLICK HERE TO ADD MARKER');
       }
     });

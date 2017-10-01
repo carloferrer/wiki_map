@@ -6,12 +6,29 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/map_list.js"></script>
 
+    <script type="text/javascript" src="/scripts/logout.js"></script>
+    <script type="text/javascript" src="/scripts/active-button.js"></script>
+    <!-- <link rel="stylesheet" href="/vendor/nav.css" type="text/css"/> -->
+
+
     <link rel="stylesheet" href="/styles/map-list.css" type="text/css" />
 
 
   </head>
 
   <body>
+
+    <form id="new-map">
+      <h2>New map creation...</h2>
+      <textarea name='map_title' placeholder="Enter title for new map here!"></textarea>
+      <br>
+      <input type='submit' value='Generate new map!'>
+    </form>
+    <br><br>
+    <h2>List of existing maps...</h2>
+    <div id="map-list"></div>
+<!--   </body>
+
     <% include ./partials/_header %>
 
     <section class='main-folder'>
@@ -22,5 +39,6 @@
       </div>
     </section>
 
-  </body>
+
+  </body> -->
 </html>

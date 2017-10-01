@@ -13,7 +13,7 @@ const randoTitle32 = faker.lorem.words();
 exports.seed = function(knex, Promise) {
   const seedUsers = function () {
     return knex('users').insert([
-      {username: randoUsername1, password: admin,
+      {username: randoUsername1, password: 'admin'},
       {username: randoUsername2, password: faker.internet.password()},
       {username: randoUsername3, password: faker.internet.password()},
     ], 'id');
@@ -44,6 +44,7 @@ exports.seed = function(knex, Promise) {
     ]);
   };
 
+
   return knex('favourite').del()
   .then(function() { return knex('map_index').del(); })
   .then(function() { return knex('users').del(); })
@@ -51,7 +52,7 @@ exports.seed = function(knex, Promise) {
     return seedUsers()
         .then(function(userid) {
           return seedMaps(userid).then(function(mapid) {
-            return seedFave(mapid, userid);
+            return seedFave(mapid, userid)
           });
         })
         .catch(function (err) {

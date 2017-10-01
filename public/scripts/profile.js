@@ -13,7 +13,20 @@ $(document).ready(function() {
       console.error(error);
     })
   }
+  
+  function loadMapIndex() {
+    $.get("http://localhost:8080/api/maps"+window.location.pathname)
+    .done(function(maps) {
+      console.log(maps)
+      for (let i = 0; i < maps.length; i++) {
+        $('#map-list').append('<li> <a href=/maps/'+maps[i].id+'>'+maps[i].title+'</a><br>');
+      }
+    })
+  }
+
 
   loadUserData()
+
+  loadMapIndex()
 
 })

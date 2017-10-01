@@ -34,8 +34,8 @@ body {
   float: left; }
 
 #nav-bar h1 {
-  color: #FF0000;
-  text-shadow: -1px 0 #00DAD5, 0 1px #00DAD5, 1px 0 #00DAD5, 0 -1px #00DAD5;
+  color: #FF6800;
+  text-shadow: -1px 0 #FF0000, 0 1px #FF0000, 1px 0 #FF0000, 0 -1px #FF0000;
   text-align: center;
   float: left; }
 
@@ -86,8 +86,6 @@ nav a::before {
   transform: perspective(5px) rotateX(2deg);
   transform-origin: bottom; }
 
-
-
 nav.left a {
   padding: 1.5em 2em 1em 1em;
   float: left; }
@@ -128,8 +126,4 @@ main {
   justify-content: center;
   align-items: center; }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4d6918f175ab131cc8ca84a9d4f79f8d5bff25be
 /*# sourceMappingURL=splash.css.map */
