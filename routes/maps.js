@@ -108,7 +108,8 @@ module.exports = (knex) => {
       // point_url: req.body.url,
       coordinate_x: req.body.x,
       coordinate_y: req.body.y,
-      point_description: req.body.point_desc
+      point_description: req.body.point_desc,
+      creator_id: req.session.id[0]
       // Carlo Debugging: commented out the following since don't have pic to test w/
       // point_pic: req.body.pic
     }, 'id')
