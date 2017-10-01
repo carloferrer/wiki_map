@@ -21,8 +21,7 @@ $(document).ready(function() {
 
   function createNewMap(newTitle) {
       $.post('http://localhost:8080/api/maps/create', newTitle)
-      .done(function() {
-      })
+      .done(function(){})
       .fail(function(error) {
         console.error(error);
       });
@@ -42,28 +41,6 @@ $(document).ready(function() {
 
     });
 
-
-
-  //   //   $.get('http://localhost:8080/api/maps')
-  //   //   .done(function(maps) {
-  //   //     newMapNum += maps.length;
-  //   //     console.log(newMapNum);
-
-  //   //   })
-  //   //   .fail(function(error) {
-  //   //     console.error(error);
-  //   //   });
-
-  //   //   $.post('http://localhost:8080/api/maps/create')
-  //   //   .done(function() {
-
-  //   //   })
-  //   //   .fail(function(error) {
-  //   //     console.error(error);
-  //   //   });
-
-  //   // });
-  //   }
   }
 
 
