@@ -18,6 +18,7 @@ $(document).ready(function() {
       .done(function(map) {
 
         initMap();
+        // loadPoints();
 
         console.log(map);
         $('#map-title').text('Map: '+map.title);
@@ -30,6 +31,17 @@ $(document).ready(function() {
       $('#map-title').text('CREATE NEW MAP');
         initMap();
     }
+  }
+
+  function loadPoints() {
+    console.log("***loading points...***");
+    $.get('http://localhost:8080/api'+path+'/points')
+    .done(function(points) {
+      console.log(points);
+    })
+    .fail(function(error) {
+      console.error(error);
+    });
   }
 
   function createNewPoint(all) {
@@ -102,10 +114,6 @@ $(document).ready(function() {
         });
         markers[markerId] = marker; // cache marker in markers object
         bindMarkerEvents(marker); // bind right click event to marker
-
-        // store lat and lng for if point is to be saved
-        // temp_lat = lat;
-        // temp_lng = lng;
 
         $('.edit-coord-x').text(lat);
         $('.edit-coord-y').text(lng);

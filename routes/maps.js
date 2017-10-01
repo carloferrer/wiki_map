@@ -56,7 +56,7 @@ module.exports = (knex) => {
     .select("*")
     .from("maps_points")
     .where({
-      map_index_id: [req.params.id]
+      map_index_id: req.params.id
     })
     .then((results) => {
       res.json(results)
@@ -109,6 +109,7 @@ module.exports = (knex) => {
       coordinate_x: req.body.x,
       coordinate_y: req.body.y,
       point_description: req.body.point_desc,
+      map_index_id: req.params.id,
       creator_id: req.session.id[0]
       // Carlo Debugging: commented out the following since don't have pic to test w/
       // point_pic: req.body.pic
