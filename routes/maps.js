@@ -35,13 +35,12 @@ module.exports = (knex) => {
   })
 
     //Load users created and contributed maps
-    router.get("/users/:id", (req, res) => {
+    router.get("/profile/users/:id", (req, res) => {
+      console.log("FINDING POINTS REFERENCE")
       knex
       .select("*")
-      .from("map_index")
-      .where({
-        creator_id: req.params.id
-      })
+      .from("map_points")
+      .where("creator_id", req.params.id)
       .then((results) => {
         res.json(results)
       })

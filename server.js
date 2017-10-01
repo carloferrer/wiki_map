@@ -161,10 +161,6 @@ app.post("/logout", (req, res) => {
 
 //user profile page
 app.get("/users/:id", (req, res) => {
-<<<<<<< HEAD
-=======
-
->>>>>>> 994b9b16f5f05a229ac289e282868b53297287fb
   let userVerification = {user_id: req.session.id}
   if (req.session.id) {
     return res.render("profile", userVerification)

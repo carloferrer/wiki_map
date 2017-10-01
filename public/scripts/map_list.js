@@ -19,6 +19,7 @@ $(document).ready(function() {
     });
   }
 
+
   function createNewMap(newTitle) {
       $.post('http://localhost:8080/api/maps/create', newTitle)
       .done(function(){})
