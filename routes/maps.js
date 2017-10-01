@@ -52,9 +52,12 @@ module.exports = (knex) => {
 
   //Load map points
   router.get("/:id/points", (req, res) => {
+    // Carlo debugging....
+    console.log('**INSIDE ROUTER GET POINTS**');
+    console.log('the following is the map_index_id',req.params.id);
     knex
     .select("*")
-    .from("maps_points")
+    .from("map_points")
     .where({
       map_index_id: req.params.id
     })

@@ -18,7 +18,7 @@ $(document).ready(function() {
       .done(function(map) {
 
         initMap();
-        // loadPoints();
+        loadPoints();
 
         console.log(map);
         $('#map-title').text('Map: '+map.title);
