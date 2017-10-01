@@ -102,7 +102,8 @@ module.exports = (knex) => {
       point_url: req.body.url,
       coordinate_x: req.body.x,
       coordinate_y: req.body.y,
-      point_pic: req.body.pic
+      point_pic: req.body.pic,
+      point_description: req.body.point_desc
     })
     .then(() => {
       res.statusCode(200).send()
