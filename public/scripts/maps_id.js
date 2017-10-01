@@ -34,8 +34,12 @@ $(document).ready(function() {
     }
   }
 
-  function createNewPoint() {
-
+  function createNewPoint(title, desc, lat, lng) {
+    $.post('http://localhost:8080/api'+path+'/points/new', title, desc, lat, lng)
+    .done(function(){})
+    .fail(function(error) {
+      console.error(error);
+    });
   }
 
   function formSubmission() {
@@ -50,7 +54,7 @@ $(document).ready(function() {
       console.log(temp_title, temp_desc);
       console.log(temp_lat, temp_lng);
 
-
+      createNewPoint(temp_title, temp_desc, temp_lat, temp_lng);
     });
   }
 

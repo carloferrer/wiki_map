@@ -95,14 +95,19 @@ module.exports = (knex) => {
   })
 
   //add point to map
-  router.post(":id/points/new", (req, res) => {
+  router.post("/:id/points/new", (req, res) => {
+    // Carlo debuggin...
+    console.log("THIS BE THE REQBODYPOINTTITLE:",req.body.point_title);
     knex("map_points").where("map_index_id", "=", req.params.id)
     .insert({
       point_title: req.body.point_title,
-      point_url: req.body.url,
+      // Carlo Debugging: currently cannot satisfy the following stretch goal
+      // point_url: req.body.url,
       coordinate_x: req.body.x,
       coordinate_y: req.body.y,
-      point_pic: req.body.pic
+      point_description: req.body.point_desc
+      // Carlo Debugging: commented out the following since don't have pic to test w/
+      // point_pic: req.body.pic
     })
     .then(() => {
       res.statusCode(200).send()

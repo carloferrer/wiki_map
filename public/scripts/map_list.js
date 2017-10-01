@@ -21,8 +21,7 @@ $(document).ready(function() {
 
   function createNewMap(newTitle) {
       $.post('http://localhost:8080/api/maps/create', newTitle)
-      .done(function() {
-      })
+      .done(function(){})
       .fail(function(error) {
         console.error(error);
       });
