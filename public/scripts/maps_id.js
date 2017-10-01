@@ -17,7 +17,7 @@ $(document).ready(function() {
       $.get('http://localhost:8080/api'+path)
       .done(function(map) {
 
-        initMap();
+
         loadPoints();
 
         console.log(map);
@@ -29,7 +29,7 @@ $(document).ready(function() {
       });
     } else {
       $('#map-title').text('CREATE NEW MAP');
-        initMap();
+        initMap([]);
     }
   }
 
@@ -37,7 +37,9 @@ $(document).ready(function() {
     console.log("***loading points...***");
     $.get('http://localhost:8080/api'+path+'/points')
     .done(function(points) {
-      console.log(points);
+      console.log(points[0]);
+      console.log(points.length);
+      initMap(points);
     })
     .fail(function(error) {
       console.error(error);
@@ -86,7 +88,7 @@ $(document).ready(function() {
     });
   }
 
-  function initMap() {
+  function initMap(points) {
     infowindow = new google.maps.InfoWindow();
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -97,6 +99,45 @@ $(document).ready(function() {
 
     geolocate(map, navigator.geolocation);
     searchPlace(map);
+
+    console.log('pointsarraylength from inside init', points.length);
+
+var getMarkerUniqueId = function(lat, lng) {
+        return lat + '_' + lng;
+    };
+
+    var getLatLng = function(lat, lng) {
+      return new google.maps.LatLng(lat, lng);
+    };
+
+    var bindMarkerEvents = function(marker) {
+      google.maps.event.addListener(marker, "rightclick", function (point) {
+          var markerId = getMarkerUniqueId(point.latLng.lat(), point.latLng.lng()); // get marker id by using clicked point's coordinate
+          var marker = markers[markerId]; // find marker
+          removeMarker(marker, markerId); // remove it
+      });
+    };
+
+    var removeMarker = function(marker, markerId) {
+      marker.setMap(null); // set markers setMap to null to remove it from map
+      delete markers[markerId]; // delete marker instance from markers object
+    };
+
+    if(points.length) {
+      for (var i = 0; i < points.length; i++) {
+        var lat = points[i].coordinate_x; // lat of loaded point
+        var lng = points[i].coordinate_y; // lng of loaded point
+        var markerId = getMarkerUniqueId(lat, lng); // an that will be used to cache this marker in markers object.
+
+        var marker = new google.maps.Marker({
+            position: getLatLng(lat, lng),
+            map: map,
+            id: 'marker_' + markerId
+        });
+        markers[markerId] = marker; // cache marker in markers object
+        bindMarkerEvents(marker); // bind right click event to marker
+      }
+    }
 
     editMapMode();
 
@@ -121,26 +162,8 @@ $(document).ready(function() {
         $('#map-edit').val('CLICK HERE TO ADD MARKER');
       }
     });
-    var getMarkerUniqueId = function(lat, lng) {
-        return lat + '_' + lng;
-    };
 
-    var getLatLng = function(lat, lng) {
-      return new google.maps.LatLng(lat, lng);
-    };
 
-    var bindMarkerEvents = function(marker) {
-      google.maps.event.addListener(marker, "rightclick", function (point) {
-          var markerId = getMarkerUniqueId(point.latLng.lat(), point.latLng.lng()); // get marker id by using clicked point's coordinate
-          var marker = markers[markerId]; // find marker
-          removeMarker(marker, markerId); // remove it
-      });
-    };
-
-    var removeMarker = function(marker, markerId) {
-      marker.setMap(null); // set markers setMap to null to remove it from map
-      delete markers[markerId]; // delete marker instance from markers object
-    };
   }
 
 
