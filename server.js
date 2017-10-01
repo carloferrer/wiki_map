@@ -167,6 +167,18 @@ app.get("/users/:id", (req, res) => {
   }
 })
 
+app.post("/users/edit/:id", (req, res) => {
+  knex("users").where("id", "=", req.params.id)
+  .update("username", req.body.username)
+  .update("about_me", req.body.about)
+  .then(() => {
+    return res.redirect("/")
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+})
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 })

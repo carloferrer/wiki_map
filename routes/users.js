@@ -18,10 +18,10 @@ module.exports = (knex) => {
   })
 
   //edit user profile
-  router.put("/edit/user/:id", (req, res) => {
+  router.post("/edit/users/:id", (req, res) => {
     knex("users").where("id", "=", req.params.id)
-    .update("username", req.body.username)
-    .update("about_me", req.body.about)
+    .update("username", "red")
+    .update("about_me", "about me section entry")
     .then(() => {
       res.statusCode(200).send()
     })

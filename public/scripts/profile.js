@@ -17,7 +17,7 @@ $(document).ready(function() {
   function loadMapIndex() {
     $.get('http://localhost:8080/api/maps/profile'+window.location.pathname)
     .done(function(maps) {
-      console.log("test for map load")
+      console.log("test for map list load")
       console.log(maps[0].title)
       
       for (let i = 0; i < maps.length; i++) {
