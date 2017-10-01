@@ -38,7 +38,7 @@ module.exports = (knex) => {
     router.get("/profile/users/:id", (req, res) => {
       console.log("FINDING POINTS REFERENCE")
       knex
-      .select("*")
+      .select("map_index_id")
       .from("map_points")
       .where("creator_id", req.params.id)
       .then((results) => {
