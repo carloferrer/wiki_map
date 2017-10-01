@@ -14,28 +14,34 @@
 
   <body>
 
-    <% include ./partials/_header %>
+    <!-- <% include ./partials/_header %> -->
 
     <h1 id="map-title">MAP ID: <%=map_id%></h1>
-    <h2 id="map-edit">CLICK HERE TO ADD MARKER</h2>
     <input id="pac-input" class="controls" type="text" placeholder="Search new region to refocus map boundary!">
 
     <div id='map-n-points'>
       <div id="map"></div>
 
-      <div id="point-info">
-        <div class="edit-pic">Picture: {TBD}</div>
-        <div class="edit-title">Title: {TEXT INPUT}</div>
-        <div class="edit-coord-x">Latitude: {ADD POINT ON MAP}</div>
-        <div class="edit-coord-y">Longitude: {ADD POINT ON MAP}</div>
-        <div class="edit-url">URL: {TEXT INPUT}</div>
-        <div class="edit-desc">Description: {TEXT INPUT}</div>
-        <h3 id="save-point">CLICK HERE TO SAVE POINT</h3>
-      </div>
+      <form id="point-info">
+        <input type="button" id="map-edit" value="CLICK HERE TO ADD MARKER">
+        <br><br>
+        <img class="point-pic" src="https://images.vexels.com/media/users/3/141915/isolated/preview/fa18fbc911311b5371870c880fa5f75a-location-pin-by-vexels.png">
+        <br>
+        <textarea class="edit-title" name='point_title' placeholder="Please enter title for point."></textarea>
+
+        <textarea class="edit-desc" name='point_desc' placeholder="Please enter description for point."></textarea>
+        <br><br>
+        <textarea class="edit-coord-x" name='x' placeholder="Latitude: add marker to generate."></textarea>
+        <textarea class="edit-coord-y" name='y' placeholder="Longitude: add marker to generate."></textarea>
+        <br>
+          Note: right-click on marker to remove it.
+        <br><br>
+        <input type="submit" value='SAVE POINT!'>
+      </form>
     </div>
   </body>
 
-    <section class='main-folder'>
+    <!-- <section class='main-folder'>
       <div class='paper'>
         <h1 id="map-title">MAP ID: <%=map_id%></h1>
         <h2 id="map-edit">CLICK TO EDIT</h2>
@@ -45,7 +51,7 @@
       </div>
 
 
-    </section>
+    </section> -->
 
   </body>
 </html>

@@ -7,9 +7,6 @@ module.exports = (knex) => {
 
   //Load map index
   router.get("", (req, res) => {
-    // Carlo Ferre debugging:
-    console.log('\n***INSIDE LOAD MAP INDEX ROUTE***\n')
-
     knex
     .select("*")
     .from("map_index")
@@ -55,11 +52,14 @@ module.exports = (knex) => {
 
   //Load map points
   router.get("/:id/points", (req, res) => {
+    // Carlo debugging....
+    console.log('**INSIDE ROUTER GET POINTS**');
+    console.log('the following is the map_index_id',req.params.id);
     knex
     .select("*")
-    .from("maps_points")
+    .from("map_points")
     .where({
-      map_index_id: [req.params.id]
+      map_index_id: req.params.id
     })
     .then((results) => {
       res.json(results)
@@ -77,27 +77,51 @@ module.exports = (knex) => {
 
   //create new map
   router.post("/create", (req, res) => {
+
+
+    if (!req.body.map_title) {
+      res.status(400);
+      console.log('error: invalid request: no data in POST body');
+      return;
+    }
+
+    console.log(req.body.map_title, req.session.id[0]);
+
     knex("map_index")
-    .insert({
-      title: req.body.map_title,
-      creator_id: req.session.id
+    .insert(
+    { title: req.body.map_title, creator_id: req.session.id[0] }
+    , 'id')
+    .catch((err) => {
+      console.error(err)
     })
+
   })
 
   //add point to map
-  router.post(":id/points/new", (req, res) => {
+  router.post("/:id/points/new", (req, res) => {
+    // Carlo debuggin...
+    console.log("THIS BE THE REQBODYPOINTTITLE:",req.body.point_title);
+    console.log("THIS BE THE REQBODYDESC:",req.body.point_desc);
+    console.log("THIS BE THE LATITUDE:",req.body.x);
+    console.log("THIS BE THE LONGITUDE:",req.body.y);
     knex("map_points").where("map_index_id", "=", req.params.id)
     .insert({
       point_title: req.body.point_title,
-      point_url: req.body.url,
+      // Carlo Debugging: currently cannot satisfy the following stretch goal
+      // point_url: req.body.url,
       coordinate_x: req.body.x,
       coordinate_y: req.body.y,
-      point_pic: req.body.pic
-    })
-    .then(() => {
-      res.statusCode(200).send()
-    })
+      point_description: req.body.point_desc,
+      map_index_id: req.params.id,
+      creator_id: req.session.id[0]
+      // Carlo Debugging: commented out the following since don't have pic to test w/
+      // point_pic: req.body.pic
+    }, 'id')
+    // .then(() => {
+    //   res.statusCode(200).send()
+    // })
     .catch((err) => {
+      console.log('HERE BE AN ERROR')
       console.error(err)
     })
   })
