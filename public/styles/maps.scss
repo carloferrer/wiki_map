@@ -9,8 +9,8 @@
 html {
   box-sizing: border-box;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  // justify-content: center;
+  // align-items: center;
 }
 // *, *:before, *:after {
 //   box-sizing: inherit;
@@ -34,7 +34,7 @@ html {
 /* Optional: Makes the sample page fill the window. */
 html, body {
   height: 100%;
-  margin: 0;
+  margin: .001em;
   padding: 0;
 }
 #description {
