@@ -5,6 +5,10 @@ $logo-red: #FF0000;
 $logo-orange: #FF6800;
 $logo-blue: #00DAD5;
 
+.active {
+  background: $active-tab;
+}
+
 #nav-bar {
   // background-color: #337512;
   width: 100%;

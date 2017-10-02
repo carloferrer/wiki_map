@@ -1,5 +1,6 @@
 body {
-  background-image: url("https://wallpapercave.com/wp/i9E5wdU.jpg"); }
+  background-image: url("https://wallpapercave.com/wp/i9E5wdU.jpg");
+  overflow: hidden; }
 
 .main-folder {
   height: 39em;
@@ -20,6 +21,9 @@ body {
   height: 88%;
   width: 90%;
   border-radius: 2px; }
+
+.active {
+  background: #FFEBCD; }
 
 #nav-bar {
   width: 100%;
