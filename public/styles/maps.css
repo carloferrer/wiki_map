@@ -125,9 +125,6 @@ html {
   justify-content: center;
   align-items: center; }
 
-*, *:before, *:after {
-  box-sizing: inherit; }
-
 #point-list {
   position: absolute;
   top: 11.5;
@@ -138,8 +135,9 @@ html {
   z-index: 1000; }
 
 #map {
-  height: 500px;
-  width: 50%; }
+  height: 465px;
+  width: 50%;
+  margin-right: 2em; }
 
 /* Optional: Makes the sample page fill the window. */
 html, body {
@@ -160,6 +158,9 @@ html, body {
 
 #map #infowindow-content {
   display: inline; }
+
+#map-n-points {
+  display: flex; }
 
 .pac-card {
   margin: 10px 10px 0 0;
@@ -195,6 +196,9 @@ html, body {
 
 #pac-input:focus {
   border-color: #4d90fe; }
+
+.point-pic {
+  max-height: .6em; }
 
 #title {
   color: #fff;
