@@ -40,6 +40,7 @@ module.exports = (knex) => {
       knex('map_points')
       .join("map_index", "map_points.map_index_id", "=", "map_index.id")
       .select("map_points.creator_id", "map_index.id", "map_index.title")
+      .where("map_points.creator_id", req.params.id)
       .distinct()
       .then((results) => {
         res.json(results)
@@ -116,9 +117,9 @@ module.exports = (knex) => {
       // Carlo Debugging: commented out the following since don't have pic to test w/
       // point_pic: req.body.pic
     }, 'id')
-    // .then(() => {
-    //   res.statusCode(200).send()
-    // })
+    .then(() => {
+      res.status(200).send()
+    })
     .catch((err) => {
       console.log('HERE BE AN ERROR')
       console.error(err)

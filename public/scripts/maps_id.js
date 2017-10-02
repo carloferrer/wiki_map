@@ -130,7 +130,8 @@ var getMarkerUniqueId = function(lat, lng) {
         var marker = new google.maps.Marker({
             position: getLatLng(lat, lng),
             map: map,
-            id: 'marker_' + markerId
+            id: 'marker_' + markerId,
+            title: points[i].point_title
         });
         markers[markerId] = marker; // cache marker in markers object
         bindMarkerEvents(marker); // bind right click event to marker
@@ -141,8 +142,8 @@ var getMarkerUniqueId = function(lat, lng) {
         google.maps.event.addListener(marker,'click',function(){
           console.log(temp_title, temp_desc);
           pointWindow.setContent('Title: '+temp_title+'<br>Description: '+temp_desc);
-          pointWindow.open(map);
-          pointWindow.setPosition(getLatLng(lat,lng));
+          pointWindow.open(map, this);
+          
         });
       }
     }
