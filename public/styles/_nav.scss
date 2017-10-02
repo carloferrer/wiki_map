@@ -5,6 +5,9 @@ $logo-red: #FF0000;
 $logo-orange: #FF6800;
 $logo-blue: #00DAD5;
 
+.title {
+  font-family: 'Frijole', cursive;
+}
 .active {
   background: $active-tab;
 }
@@ -26,7 +29,7 @@ $logo-blue: #00DAD5;
 
 #nav-bar h1 {
   color: $logo-red;
-  text-shadow: -1px 0 $logo-blue, 0 1px $logo-blue, 1px 0 $logo-blue, 0 -1px $logo-blue;
+  text-shadow: -2px 0 $logo-blue, 0 2px $logo-blue, 2px 0 $logo-blue, 0 -2px $logo-blue;
   text-align: center;
   float: left;
 }
@@ -75,7 +78,7 @@ nav a div {
    border-bottom: none;
    border-radius: 10px 10px 0 0;
    padding: 5px;
-   background: $inactive-tab;
+   background: $active-tab;
    box-shadow: 0 2px hsla(0,0%,100%,.5) inset;
    transform: perspective(5px) rotateX(2deg);
    transform-origin: bottom;

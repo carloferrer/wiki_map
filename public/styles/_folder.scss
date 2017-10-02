@@ -11,6 +11,8 @@ $inactive-tab: #F5CE94;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: .1em solid #aaa;
+  border-top: none;
 }
 
 .main-folder::before {
