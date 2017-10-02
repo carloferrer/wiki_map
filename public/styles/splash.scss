@@ -6,12 +6,7 @@ $logo-blue: #00DAD5;
 $logo-orange: #FF6800;
 
 .form {
-  position: absolute;
   top: 10em; left: 19em;
-}
-
-.register {
-  padding: 1em;
 }
 
 .login {
@@ -20,6 +15,7 @@ $logo-orange: #FF6800;
 
 .paper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
