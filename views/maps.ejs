@@ -13,32 +13,35 @@
   </head>
 
   <body>
+    <% include ./partials/_header %>
+    <section class='main-folder'>
 
-    <!-- <% include ./partials/_header %> -->
+      <div class='paper'>
+        <h1 id="map-title">MAP ID: <%=map_id%></h1>
+        <input id="pac-input" class="controls" type="text" placeholder="Search new region to refocus map boundary!">
 
-    <h1 id="map-title">MAP ID: <%=map_id%></h1>
-    <input id="pac-input" class="controls" type="text" placeholder="Search new region to refocus map boundary!">
+        <div id='map-n-points'>
+          <div id="map"></div>
 
-    <div id='map-n-points'>
-      <div id="map"></div>
+          <form id="point-info">
+            <input type="button" id="map-edit" value="CLICK HERE TO ADD MARKER">
+            <br><br>
+            <img class="point-pic" src="https://images.vexels.com/media/users/3/141915/isolated/preview/fa18fbc911311b5371870c880fa5f75a-location-pin-by-vexels.png">
+            <br>
+            <textarea class="edit-title" name='point_title' placeholder="Please enter title for point."></textarea>
 
-      <form id="point-info">
-        <input type="button" id="map-edit" value="CLICK HERE TO ADD MARKER">
-        <br><br>
-        <img class="point-pic" src="https://images.vexels.com/media/users/3/141915/isolated/preview/fa18fbc911311b5371870c880fa5f75a-location-pin-by-vexels.png">
-        <br>
-        <textarea class="edit-title" name='point_title' placeholder="Please enter title for point."></textarea>
-
-        <textarea class="edit-desc" name='point_desc' placeholder="Please enter description for point."></textarea>
-        <br><br>
-        <textarea class="edit-coord-x" name='x' placeholder="Latitude: add marker to generate."></textarea>
-        <textarea class="edit-coord-y" name='y' placeholder="Longitude: add marker to generate."></textarea>
-        <br>
-          Note: right-click on marker to remove it.
-        <br><br>
-        <input type="submit" value='SAVE POINT!'>
-      </form>
-    </div>
+            <textarea class="edit-desc" name='point_desc' placeholder="Please enter description for point."></textarea>
+            <br><br>
+            <textarea class="edit-coord-x" name='x' placeholder="Latitude: add marker to generate."></textarea>
+            <textarea class="edit-coord-y" name='y' placeholder="Longitude: add marker to generate."></textarea>
+            <br>
+              Note: right-click on marker to remove it.
+            <br><br>
+            <input type="submit" value='SAVE POINT!'>
+          </form>
+        </div>
+      </div>
+    </section>
   </body>
 
     <!-- <section class='main-folder'>
