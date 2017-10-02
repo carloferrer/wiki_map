@@ -8,7 +8,7 @@
     <script type="text/javascript" src="/scripts/logout.js"></script>
     <script type="text/javascript" src="/scripts/active-button.js"></script>
     <link rel="stylesheet" href="/styles/splash.css" type="text/css" />
-
+    <link href="https://fonts.googleapis.com/css?family=Frijole" rel="stylesheet">
 
 
   </head>
@@ -19,22 +19,26 @@
     <section class='main-folder'>
 
       <div class='paper'>
+        <h2 class='welcome'> Welcome to Map Adventure! </h2>
+        <div class="desc">
+          <h3>Map Adventure helps you plan and save memories of your adventures.</h3>
+          <h3>Register or Login to begin planning some adventures today!</h3>
+        </div>
         <div class='register'>
           <section class='form'>
             <form action="/register" method="POST">
-              <label for="reg_username">Enter your email:</label><br>
+              <h4>Register</h4>
+              <label for="reg_username">Enter your username:</label><br>
               <input id="reg_username" type="reg_username" name="reg_username" placeholder="Username" style="width: 300px">
               <br>
               <label for="reg_password">Enter your password</label><br>
               <input id="reg_password" type="reg_password" name="reg_password" placeholder="Password" style="width: 300px"><br><br>
               <input type="submit" value="Submit"></form>
-
-              <form action="/logout" method="POST">
-                <input type="submit" value="Logout">
             </form>
           </div>
           <div class='login'>
             <form action="/login" method="POST">
+              <h4>Login</h4>
               <label for="username">Enter your email:</label><br>
               <input id="username" type="username" name="username" placeholder="Username" style="width: 300px">
               <br>
