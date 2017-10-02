@@ -1,6 +1,7 @@
 body {
   background-image: url("https://wallpapercave.com/wp/i9E5wdU.jpg");
-  overflow: hidden; }
+  overflow: hidden;
+  margin: 0 auto; }
 
 .main-folder {
   height: 39em;
