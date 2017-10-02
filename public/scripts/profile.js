@@ -18,9 +18,9 @@ $(document).ready(function() {
     $.get('http://localhost:8080/api/maps/profile'+window.location.pathname)
     .done(function(maps) {
       console.log("test for map list load")
-      console.log(maps[0].title)
-      
+      console.log(maps)
       for (let i = 0; i < maps.length; i++) {
+
         $('#map-list').append('<li> <a href=/maps/'+maps[i].id+'>'+maps[i].title+'</a><br>');
       }
     })

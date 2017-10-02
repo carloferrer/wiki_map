@@ -40,6 +40,7 @@ module.exports = (knex) => {
       knex('map_points')
       .join("map_index", "map_points.map_index_id", "=", "map_index.id")
       .select("map_points.creator_id", "map_index.id", "map_index.title")
+      .distinct()
       .then((results) => {
         res.json(results)
       })
