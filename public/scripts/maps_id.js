@@ -58,14 +58,6 @@ $(document).ready(function() {
     $('#point-info').on('submit', function(event) {
       event.preventDefault();
 
-      // var temp_title = $('.edit-title').serialize();
-      // var temp_desc = $('.edit-desc').serialize();
-      // var temp_lat = $('.edit-coord-x').serialize();
-      // var temp_lng = $('.edit-coord-y').serialize();
-
-      // console.log(temp_title, temp_desc);
-      // console.log(temp_lat, temp_lng);
-
       var temp = $('.edit-title,.edit-desc,.edit-coord-x,.edit-coord-y').serialize();
 
       console.log(temp);
@@ -96,6 +88,9 @@ $(document).ready(function() {
       zoom: 13,
       mapTypeId: 'roadmap'
     });
+
+    // infoWindow.setContent('You are here.');
+
 
     geolocate(map, navigator.geolocation);
     searchPlace(map);
@@ -129,6 +124,9 @@ var getMarkerUniqueId = function(lat, lng) {
         var lng = points[i].coordinate_y; // lng of loaded point
         var markerId = getMarkerUniqueId(lat, lng); // an that will be used to cache this marker in markers object.
 
+        var pointWindow = new google.maps.InfoWindow;
+        console.log(points[i]);
+
         var marker = new google.maps.Marker({
             position: getLatLng(lat, lng),
             map: map,
@@ -136,6 +134,16 @@ var getMarkerUniqueId = function(lat, lng) {
         });
         markers[markerId] = marker; // cache marker in markers object
         bindMarkerEvents(marker); // bind right click event to marker
+
+        var temp_title = points[i].point_title;
+        var temp_desc = points[i].point_description;
+
+        google.maps.event.addListener(marker,'click',function(){
+          console.log(temp_title, temp_desc);
+          pointWindow.setContent('Title: '+temp_title+'<br>Description: '+temp_desc);
+          pointWindow.open(map);
+          pointWindow.setPosition(getLatLng(lat,lng));
+        });
       }
     }
 
@@ -249,6 +257,8 @@ var getMarkerUniqueId = function(lat, lng) {
           animation: google.maps.Animation.DROP
         });
 
+
+
         google.maps.event.addListener(marker,'click',function(){
           console.log(place.geometry.location.lat()+' '+place.geometry.location.lng());
         });
@@ -270,6 +280,3 @@ var getMarkerUniqueId = function(lat, lng) {
   }
 
 });
-
-
-
