@@ -1,0 +1,16 @@
+h2 {
+  margin: 0
+}
+
+body .full-page{
+  background-image: url("http://i.imgur.com/h0uAF0i.gif");
+
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  height: 50vw;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -34,6 +34,14 @@ $logo-blue: #00DAD5;
   float: left;
 }
 
+.navbar-nav {
+  a {
+    a:active{
+      color: white;
+    }
+  }
+}
+
 /**
  * Slanted tabs with CSS 3D transforms
  * See http://lea.verou.me/2013/10/slanted-tabs-with-css-3d-transforms/
