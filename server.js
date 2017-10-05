@@ -2,20 +2,20 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8080;
-const ENV         = process.env.ENV || "development";
-const express     = require("express");
-const bodyParser  = require("body-parser");
-const sass        = require("node-sass-middleware");
-const app         = express();
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
+const bodyParser = require("body-parser");
+const sass = require("node-sass-middleware");
+const app = express();
 
-const knexConfig  = require("./knexfile");
-const knex        = require("knex")(knexConfig[ENV]);
-const morgan      = require('morgan');
-const knexLogger  = require('knex-logger');
+const knexConfig = require("./knexfile");
+const knex = require("knex")(knexConfig[ENV]);
+const morgan = require('morgan');
+const knexLogger = require('knex-logger');
 
-const bcrypt      = require('bcrypt');
-const saltRounds  = 10;
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 var cookieSession = require('cookie-session');
 app.use(cookieSession({
@@ -25,7 +25,7 @@ app.use(cookieSession({
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
-const mapRoutes   = require("./routes/maps")
+const mapRoutes = require("./routes/maps")
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -47,7 +47,7 @@ app.use(express.static("public"));
 
 // Home
 app.get("/", (req, res) => {
-  let userVerification = {user_id: req.session.id}
+  let userVerification = { user_id: req.session.id }
   res.render("splash", userVerification)
 });
 
@@ -56,7 +56,7 @@ app.use("/api/maps", mapRoutes(knex));
 
 //map index
 app.get("/maps", (req, res) => {
-  let userVerification = {user_id: req.session.id}
+  let userVerification = { user_id: req.session.id }
   res.render("map_list", userVerification)
 });
 
@@ -84,7 +84,7 @@ app.get("/maps/:id", (req, res) => {
 
 //map edit
 app.put("/maps/edit", (req, res) => {
-  let userVerification = {user_id: req.session.id}
+  let userVerification = { user_id: req.session.id }
   res.render("maps", userVerification)
 });
 
@@ -92,7 +92,7 @@ app.use("/api/users", usersRoutes(knex));
 
 //user routes
 app.get("/users/login", (req, res) => {
-  let userVerification = {user_id: req.session.id}
+  let userVerification = { user_id: req.session.id }
   res.render("login", userVerification)
 });
 
@@ -108,48 +108,48 @@ app.post("/register", (req, res) => {
   let hashedPassword = bcrypt.hashSync(hashed, 10);
 
   knex
-  .select("*")
-  .from("users")
-  .where("username", req.body.reg_username)
-  .then((userRow) => {
+    .select("*")
+    .from("users")
+    .where("username", req.body.reg_username)
+    .then((userRow) => {
       if (userRow[0] && userRow[0].username === req.body.reg_username) {
         return res.status(400).send("Username already exists")
       } else {
-      knex("users")
-      .insert({
-        username: req.body.reg_username,
-        password: hashedPassword
-      })
-      .returning("id")
-      .then((id) => {
-        req.session.id = id
-        res.redirect("/")
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-    }
-  });
+        knex("users")
+          .insert({
+            username: req.body.reg_username,
+            password: hashedPassword
+          })
+          .returning("id")
+          .then((id) => {
+            req.session.id = id
+            res.redirect("/")
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+      }
+    });
 })
 
 //login page
 app.post("/login", (req, res) => {
   let userPass = req.body.password
   return knex
-  .select("*")
-  .from("users")
-  .where("username", req.body.username)
-  .then((userRow) => {
-    if (bcrypt.compareSync(userPass, userRow[0].password)) {
-      req.session.id = userRow[0].id
-      let userVerification = {user_id: req.session.id}
-      res.redirect("/")
-    }
-  })
-  .catch((err) => {
-    res.status(500).send("Error, please try again" + err)
+    .select("*")
+    .from("users")
+    .where("username", req.body.username)
+    .then((userRow) => {
+      if (bcrypt.compareSync(userPass, userRow[0].password)) {
+        req.session.id = userRow[0].id
+        let userVerification = { user_id: req.session.id }
+        res.redirect("/")
+      }
+    })
+    .catch((err) => {
+      res.status(500).send("Error, please try again" + err)
 
-  })
+    })
 })
 
 //logout, clear cookies
@@ -161,22 +161,29 @@ app.post("/logout", (req, res) => {
 
 //user profile page
 app.get("/users/:id", (req, res) => {
-  let userVerification = {user_id: req.session.id}
+  let userVerification = { user_id: req.session.id }
   if (req.session.id) {
     return res.render("profile", userVerification)
+  } else {
+    return res.redirect("/users")
   }
+})
+
+app.get("/users", (req, res) => {
+  let userVerification = { user_id: null }
+  res.render("userAuth", userVerification)
 })
 
 app.post("/users/edit/:id", (req, res) => {
   knex("users").where("id", "=", req.params.id)
-  .update("username", req.body.username)
-  .update("about_me", req.body.about)
-  .then(() => {
-    return res.redirect("/")
-  })
-  .catch((err) => {
-    console.error(err)
-  })
+    .update("username", req.body.username)
+    .update("about_me", req.body.about)
+    .then(() => {
+      return res.redirect("/")
+    })
+    .catch((err) => {
+      console.error(err)
+    })
 })
 
 app.listen(PORT, () => {

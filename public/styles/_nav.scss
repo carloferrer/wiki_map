@@ -39,80 +39,80 @@ $logo-blue: #00DAD5;
  * See http://lea.verou.me/2013/10/slanted-tabs-with-css-3d-transforms/
  */
 
-.left {
-  position: absolute;
-  left: 9em; bottom: .5em;
-}
+// .left {
+//   position: absolute;
+//   left: 9em; bottom: .5em;
+// }
 
 
- nav a {
-   position: relative;
-   width: 50px;
-   display: inline-flex;
-   padding: 30em 1em 1em;
-   color: inherit;
-   text-decoration: none;
-   margin: 80px -7px 0 -7px;
- }
+//  nav a {
+//    position: relative;
+//    width: 50px;
+//    display: inline-flex;
+//    padding: 30em 1em 1em;
+//    color: inherit;
+//    text-decoration: none;
+//    margin: 80px -7px 0 -7px;
+//  }
 
-nav .profile {
-  position: absolute;
-  left: 8px;
-}
+// nav .profile {
+//   position: absolute;
+//   left: 8px;
+// }
 
-nav a div {
-  position: absolute;
-  top: 25px;
-}
+// nav a div {
+//   position: absolute;
+//   top: 25px;
+// }
 
- nav a::before,
- main {
-   border: .1em solid #aaa;
- }
+//  nav a::before,
+//  main {
+//    border: .1em solid #aaa;
+//  }
 
- nav a::before {
-   content: ''; /* To generate the box */
-   position: absolute;
-   top: 0; right: 0; bottom: -.8em; left: 0;
-   z-index: -1;
-   border-bottom: none;
-   border-radius: 10px 10px 0 0;
-   padding: 5px;
-   background: $active-tab;
-   box-shadow: 0 2px hsla(0,0%,100%,.5) inset;
-   transform: perspective(5px) rotateX(2deg);
-   transform-origin: bottom;
- }
+//  nav a::before {
+//    content: ''; /* To generate the box */
+//    position: absolute;
+//    top: 0; right: 0; bottom: -.8em; left: 0;
+//    z-index: -1;
+//    border-bottom: none;
+//    border-radius: 10px 10px 0 0;
+//    padding: 5px;
+//    background: $active-tab;
+//    box-shadow: 0 2px hsla(0,0%,100%,.5) inset;
+//    transform: perspective(5px) rotateX(2deg);
+//    transform-origin: bottom;
+//  }
 
- nav.left a {
-   padding: 1.5em 2em 1em 1em;
-   float: left;
- }
+//  nav.left a {
+//    padding: 1.5em 2em 1em 1em;
+//    float: left;
+//  }
 
- nav.left a::before {
-   transform-origin: bottom left;
- }
+//  nav.left a::before {
+//    transform-origin: bottom left;
+//  }
 
- nav a.selected {
-   z-index: 2;
- }
+//  nav a.selected {
+//    z-index: 2;
+//  }
 
- nav a.selected::before {
-   margin-bottom: -1px;
-   border-top-width: 1px;
- }
+//  nav a.selected::before {
+//    margin-bottom: -1px;
+//    border-top-width: 1px;
+//  }
 
- nav a.selected::before,
- main {
-   background: #eee;
- }
+//  nav a.selected::before,
+//  main {
+//    background: #eee;
+//  }
 
- main {
-   display: block;
-   margin: -8px 0 30px -15px;
-   padding: 1em;
-   border-radius: 3px;
- }
+//  main {
+//    display: block;
+//    margin: -8px 0 30px -15px;
+//    padding: 1em;
+//    border-radius: 3px;
+//  }
 
  // border-box.css code
  // html {

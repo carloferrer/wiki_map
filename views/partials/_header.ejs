@@ -2,16 +2,30 @@
 
 <title>Map Adventure</title>
 
-<header id="nav-bar">
+<header >
 
-  <img class="logo" src="https://media.freepik.com/accounts/img/badges/you_are_on_top.png" >
-  <h1 class="title">Map Adventure!</h1>
+  <!-- <img class="logo" src="https://media.freepik.com/accounts/img/badges/you_are_on_top.png" >
+  <h1 class="title">Map Adventure!</h1> -->
 
-  <nav class="left">
-    <a href="/" id="home"><div>Home</div></a>
-    <a href="/maps" id="atlas"><div>Atlas</div></a>
-    <a href="/users/<%=user_id%>" id="profile-page"><div class='profile'>My Profile</div></a>
-    <a href="#" id="logoutEvent"><div>Logout</div></a>
-
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand">Map Adventure</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/maps">Atlas</a></li>
+        <li><a href="/users/<%=user_id%>">My Profile</a></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+    </div>
   </nav>
+
+  <!-- <nav class="left">
+    <a href="/">Home</a>
+    <a href="/maps">Atlas</a>
+    <a href="/users/<%=user_id%>">My Profile</a>
+    <a href="#">Logout</a>
+
+  </nav> -->
 </header>
