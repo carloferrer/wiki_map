@@ -21,7 +21,7 @@ $(document).ready(function () {
         console.log("test for map list load")
         console.log(maps)
         for (let i = 0; i < maps.length; i++) {
-          $('#map-list').append('<li> <a href=/maps/' + maps[i].id + '>' + maps[i].title + '</a><br>');
+          $('#map-list').append('<li> <a class="list-group-item list-group-item-action" href=/maps/' + maps[i].id + '>' + maps[i].title + '</a><br>');
         }
       })
       .fail(function (error) {

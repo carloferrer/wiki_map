@@ -27,3 +27,11 @@ body {
 .creation {
   margin-bottom: .5em;
 }
+
+#map-list li {
+  list-style-type: none;
+}
+
+#map-list-title {
+  margin-bottom: .2em
+}

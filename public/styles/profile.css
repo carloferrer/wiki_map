@@ -27,3 +27,7 @@ body {
 #edit-form-button {
   margin-top: 1em;
 }
+
+#map-list li {
+  list-style-type: none;
+}
