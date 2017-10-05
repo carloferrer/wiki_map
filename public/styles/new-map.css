@@ -1,7 +1,38 @@
+body {
+  background: url("http://i.imgur.com/h0uAF0i.gif") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.full-page {
+  display: flex;
+  justify-content: center;
+}
+
+.jumbotron {
+  background: rgb(228, 228, 228);
+  background: rgba(228, 228, 228, .8); 
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  margin-top: 3em;
+  padding-top: 2em;
+}
+
 #map {
   height: 465px;
-  width: 50%;
+  width: 40em;
   margin-right: 2em; }
+
+#map-title {
+  margin-bottom: 1em;
+}
 
 
 #description {
@@ -51,7 +82,8 @@
   font-weight: 300;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 50%; }
+  width: 50%;
+  margin-bottom: 1.5em; }
 
 #pac-input:focus {
   border-color: #4d90fe; }

@@ -1,44 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
 
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/map_list.js"></script>
-    <script type="text/javascript" src="/scripts/logout.js"></script>
-    <script type="text/javascript" src="/scripts/active-button.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/map_list.js"></script>
+  <script type="text/javascript" src="/scripts/logout.js"></script>
+  <script type="text/javascript" src="/scripts/active-button.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/map-list.css" type="text/css">
 
 
-  </head>
+</head>
 
-  <body>
-    <% include ./partials/_header %>
-    <section class='main-folder'>
+<body>
+  <% include ./partials/_header %>
+    <div class='full-page'>
 
-      <div class='paper'>
+      <div class='jumbotron'>
         <form id="new-map">
-          <h2>New map creation...</h2>
-          <textarea name='map_title' placeholder="Enter title for new map here!"></textarea>
+          <div class="creation">New map creation...</div>
+          <textarea name='map_title' class="form-control" placeholder="Enter title for new map here!"></textarea>
           <br>
-          <input type='submit' value='Generate new map!'>
+          <button type="submit" class="btn btn-primary">Generate new map!</button>
         </form>
         <br><br>
-        <h2>List of existing maps...</h2>
+        <div>List of existing maps...</div>
         <div id="map-list"></div>
       </div>
-    </section>
-<!--   </body>
+    </div>
 
-
-    <section class='main-folder'>
-      <div class='paper'>
-        <h1>Here's a list of maps...</h1>
-        <div><h2>CLICK THIS TO CREATE MAP</h2></div>
-        <div id="map-list"></div>
-      </div>
-    </section>
-
-
-  </body> -->
 </html>

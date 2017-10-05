@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <!-- css -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/profile.css" type="text/css">
   <!-- scripts -->
   <script type="text/javascript" src="/scripts/profile.js"></script>
   <script type="text/javascript" src="/scripts/logout.js"></script>
@@ -14,32 +16,30 @@
   <script type="text/javascript" src="/scripts/edit-profile.js"></script>
   <title>Map Adventure</title>
 </head>
+
 <body>
   <% include ./partials/_header %>
-  <section class='main-folder'>
-
-    <div class='paper'>
+    <div class='full-page'>
+      <div class='jumbotron'>
         <div id="about-me">
         </div>
-      <label for="chk-box">
+        <label for="chk-box">
+          <div>Click here to edit your Username and About Me</div>
         <input type="checkbox" id="chk-box" />
-          <p>Click here to edit your Username and About Me</p>
         </label>
         <hr />
         <form action="/users/edit/<%=user_id%>" method="POST" id="edit-form" style="display: none">
           <div>
             <label for="username">Username:</label>
-            <input type="text" id="name" name="username">
+            <input type="text" id="name" name="username" class="form-control">
           </div>
           <br>
           <div>
-              <label for="msg">About Me:</label>
-              <textarea id="aboutme" name="about"></textarea>
+            <label for="msg">About Me:</label>
+            <textarea id="aboutme" class="form-control" name="about"></textarea>
           </div>
           <button id="edit-form-button" type="submit">Submit</button>
         </form>
-
-      <div style="margin-top: 130px" id="about-me">
 
         <div id="map-list">
           <h2>Maps You've Contributed To!</h2>
@@ -47,6 +47,6 @@
         </div>
       </div>
     </div>
-  </section>
 </body>
+
 </html>

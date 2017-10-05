@@ -1,50 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
 
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/maps_id.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQKTN_0e8RdueqYXuKZK99uNFndl6TN6k&libraries=places"></script>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/maps_id.js"></script>
+  <script type="text/javascript" src="/scripts/add-point.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQKTN_0e8RdueqYXuKZK99uNFndl6TN6k&libraries=places"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles/new-map.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/new-map.css" type="text/css">
 
-  </head>
+</head>
 
-  <body>
-    <% include ./partials/_header %>
-    <section class='main-folder'>
+<body>
+  <% include ./partials/_header %>
+    <main class='full-page'>
 
-      <div class='paper'>
-        <h1 id="map-title">MAP ID: <%=map_id%></h1>
+      <div class='jumbotron'>
+        <div id="map-title">MAP ID:
+          <%=map_id%>
+        </div>
         <input id="pac-input" class="controls" type="text" placeholder="Search new region to refocus map boundary!">
 
         <div id='map-n-points'>
           <div id="map"></div>
 
           <form id="point-info">
-            <input type="button" id="map-edit" value="CLICK HERE TO ADD MARKER">
+            <button type="button" class="btn btn-primary" id="map-edit">Click here to add a point to the map!</button>
             <br><br>
-            <img class="point-pic" src="https://images.vexels.com/media/users/3/141915/isolated/preview/fa18fbc911311b5371870c880fa5f75a-location-pin-by-vexels.png">
-            <br>
-            <textarea class="edit-title" name='point_title' placeholder="Please enter title for point."></textarea>
+            <div id="toggle-input" style="display: none">
+              <img class="point-pic" src="https://images.vexels.com/media/users/3/141915/isolated/preview/fa18fbc911311b5371870c880fa5f75a-location-pin-by-vexels.png">
+              <br>
+              <textarea id="edit-title" class="form-control" name='point_title' placeholder="Please enter title for point."></textarea>
 
-            <textarea class="edit-desc" name='point_desc' placeholder="Please enter description for point."></textarea>
-            <br><br>
-            <textarea class="edit-coord-x" name='x' placeholder="Latitude: add marker to generate."></textarea>
-            <textarea class="edit-coord-y" name='y' placeholder="Longitude: add marker to generate."></textarea>
-            <br>
-              Note: right-click on marker to remove it.
-            <br><br>
-            <input type="submit" value='SAVE POINT!'>
+              <textarea id="edit-desc" class="form-control" name='point_desc' placeholder="Please enter description for point."></textarea>
+              <br><br>
+              <textarea id="edit-coord-x" class="form-control" name='x' placeholder="Latitude: add marker to generate."></textarea>
+              <textarea id="edit-coord-y" class="form-control" name='y' placeholder="Longitude: add marker to generate."></textarea>
+              <br> Note: right-click on marker to remove it.
+              <br><br>
+              <button type="submit" class="btn btn-primary" id="map-edit">Click here to save the point!</button>
+            </div>
           </form>
         </div>
       </div>
-    </section>
-  </body>
+      </section>
+</body>
 
-    <!-- <section class='main-folder'>
+<!-- <section class='main-folder'>
       <div class='paper'>
         <h1 id="map-title">MAP ID: <%=map_id%></h1>
         <h2 id="map-edit">CLICK TO EDIT</h2>
@@ -56,5 +61,6 @@
 
     </section> -->
 
-  </body>
+</body>
+
 </html>

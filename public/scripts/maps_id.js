@@ -21,7 +21,7 @@ $(document).ready(function() {
         loadPoints();
 
         console.log(map);
-        $('#map-title').text('Map: '+map.title);
+        $('#map-title').text(map.title);
 
       })
       .fail(function(error) {
@@ -58,7 +58,7 @@ $(document).ready(function() {
     $('#point-info').on('submit', function(event) {
       event.preventDefault();
 
-      var temp = $('.edit-title,.edit-desc,.edit-coord-x,.edit-coord-y').serialize();
+      var temp = $('#edit-title,#edit-desc,#edit-coord-x,#edit-coord-y').serialize();
 
       console.log(temp);
 
@@ -165,8 +165,8 @@ var getMarkerUniqueId = function(lat, lng) {
         markers[markerId] = marker; // cache marker in markers object
         bindMarkerEvents(marker); // bind right click event to marker
 
-        $('.edit-coord-x').text(lat);
-        $('.edit-coord-y').text(lng);
+        $('#edit-coord-x').text(lat);
+        $('#edit-coord-y').text(lng);
         editMode = false;
         $('#map-edit').val('CLICK HERE TO ADD MARKER');
       }
