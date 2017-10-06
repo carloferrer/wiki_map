@@ -7,6 +7,7 @@ $(() => {
       method: 'POST',
 
       success: function(result) {
+          alert("Log out completed")
           window.location.href = "/"
       }
     })

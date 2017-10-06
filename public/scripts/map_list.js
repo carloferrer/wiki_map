@@ -33,12 +33,13 @@ $(document).ready(function() {
   function formSubmission() {
 
     $('#new-map').on('submit', function(event) {
-
+     
       event.preventDefault();
       var newTitle = $('textarea').serialize();
       console.log(newTitle);
 
       createNewMap(newTitle);
+      alert("New Map Created!")
 
     });
 

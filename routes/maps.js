@@ -39,10 +39,12 @@ module.exports = (knex) => {
     console.log("FINDING POINTS REFERENCE")
     knex('map_points')
       .join("map_index", "map_points.map_index_id", "=", "map_index.id")
-      .select("map_points.creator_id", "map_index.id", "map_index.title")
+      .select("map_points.creator_id", "map_index.creator_id", "map_index.id", "map_index.title")
       .where("map_points.creator_id", req.params.id)
+      .orWhere("map_index.creator_id", req.params.id)
       .distinct()
       .then((results) => {
+        console.log(results)
         res.json(results)
       })
       .catch((err) => {
@@ -85,11 +87,11 @@ module.exports = (knex) => {
       return;
     }
 
-    console.log(req.body.map_title, req.session.id[0]);
+    console.log(req.body.map_title, req.session.id);
 
     knex("map_index")
       .insert(
-      { title: req.body.map_title, creator_id: req.session.id[0] }
+      { title: req.body.map_title, creator_id: req.session.id }
       , 'id')
       .catch((err) => {
         console.error(err)
@@ -104,6 +106,7 @@ module.exports = (knex) => {
     console.log("THIS BE THE REQBODYDESC:", req.body.point_desc);
     console.log("THIS BE THE LATITUDE:", req.body.x);
     console.log("THIS BE THE LONGITUDE:", req.body.y);
+    console.log(req.session.id)
     knex("map_points").where("map_index_id", "=", req.params.id)
       .insert({
         point_title: req.body.point_title,
@@ -113,7 +116,7 @@ module.exports = (knex) => {
         coordinate_y: req.body.y,
         point_description: req.body.point_desc,
         map_index_id: req.params.id,
-        creator_id: req.session.id[0]
+        creator_id: req.session.id
         // Carlo Debugging: commented out the following since don't have pic to test w/
         // point_pic: req.body.pic
       }, 'id')
